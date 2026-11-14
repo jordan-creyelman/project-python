@@ -146,3 +146,10 @@ Si une donnée manque, faire une hypothèse explicite et réversible ; ne pas in
 - Séparer la logique métier des entrées/sorties lorsque cela améliore la clarté ou les tests.
 - Préférer fonctions + composition ; créer des classes ou des couches seulement en présence d'un besoin réel.
 - Refactoriser selon la complexité observée, sans quotas arbitraires de lignes ou de modules.
+
+## Guides complémentaires — à consulter selon la tâche
+- [docs/SECURITY.md](docs/SECURITY.md) : entrées externes, secrets, permissions, injections et dépendances. Sécurité non négociable, contrôles proportionnés aux risques.
+- [docs/CONFIGURATION.md](docs/CONFIGURATION.md) : configuration explicite, validation au démarrage, variables d'environnement et séparation des secrets.
+- [docs/LOGGING.md](docs/LOGGING.md) : niveaux de logs, gestion des traces, informations non sensibles et observabilité proportionnée.
+- [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) : contrat de travail de l'assistant, analyse de l'existant, changements minimaux, vérifications et compte rendu honnête.
+- Pour chaque nouvelle tâche, lire uniquement les guides pertinents en plus de ce fichier et du contexte du projet.
