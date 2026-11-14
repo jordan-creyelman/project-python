@@ -6,6 +6,9 @@ Base de contexte pour développer des projets Python **de toute taille** sans su
 - [AGENTS.md](AGENTS.md) : instructions pour assistants de code et conventions générales (PEP 8, PEP 257, KISS, SOLID, YAGNI, DRY).
 - [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) : modèle à compléter pour chaque projet (objectif, taille, contraintes, architecture, tests).
 
+- [docs/ERROR_HANDLING.md](docs/ERROR_HANDLING.md) : gestion des exceptions, validation, logs, défaillances externes, sécurité.
+- [docs/TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) : stratégie de tests unitaires, intégration, E2E, régression, contrats, sécurité et performance.
+
 ## Comment commencer un projet
 1. Créer un dossier pour le projet (par ex. `projects/mon-outil/`) ou utiliser ces règles dans un dépôt Python dédié.
 2. Choisir la taille **XS**, **S**, **M** ou **L/XL** selon les besoins, pas seulement les lignes de code.
