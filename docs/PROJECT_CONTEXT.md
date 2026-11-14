@@ -33,6 +33,15 @@
 - Pourquoi pas une architecture plus lourde : À définir
 - Décisions (ADR si nécessaire) : À définir
 
+## Conception modulaire
+- Responsabilités principales des fonctions : À définir
+- Modules nécessaires actuellement : À définir
+- Fonctions publiques et contrats : À définir
+- Frontières de logique pure / I/O : À définir
+- Dépendances entre modules / risques de cycles : À définir
+- Choix fonctions, composition ou classes : À justifier selon besoin
+- Référence : `docs/MODULAR_DESIGN.md`
+
 ## Qualité
 - Ruff : lint et format
 - pytest : tests utiles
