@@ -39,6 +39,22 @@
 - Typage statique : selon risque/complexité
 - Critères d'acceptation : À définir
 
+## Gestion des erreurs
+- Entrées à valider : À définir
+- Exceptions attendues et messages utilisateur : À définir
+- Comportement si dépendance externe indisponible : À définir
+- Logs / métriques / retry nécessaires : À définir
+- Référence : `docs/ERROR_HANDLING.md`
+
+## Stratégie de tests
+- Tests unitaires : À définir
+- Tests d'intégration : À définir
+- Tests E2E / contrat : seulement si justifiés
+- Cas limites et défaillances critiques : À définir
+- Tests de régression pour bugs corrigés : oui si possible
+- Performance / sécurité / compatibilité : selon risques
+- Référence : `docs/TESTING_STRATEGY.md`
+
 ## Commandes
 - Installation : À définir
 - Exécution : À définir
