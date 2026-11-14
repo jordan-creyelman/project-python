@@ -64,6 +64,33 @@
 - Performance / sécurité / compatibilité : selon risques
 - Référence : `docs/TESTING_STRATEGY.md`
 
+## Sécurité
+- Données sensibles et secrets : À définir
+- Entrées non fiables et permissions : À définir
+- Risques spécifiques (SQL, fichiers, réseau, API) : À définir
+- Contrôles/tests de sécurité utiles : À définir
+- Référence : `docs/SECURITY.md`
+
+## Configuration
+- Sources de configuration (CLI, environnement, fichier) : À définir
+- Valeurs requises, défauts sûrs et validation : À définir
+- Gestion des secrets et environnements : À définir
+- Référence : `docs/CONFIGURATION.md`
+
+## Logging et diagnostic
+- Niveau de log par défaut : À définir
+- Événements importants à observer : À définir
+- Données interdites dans les logs : À définir
+- Identifiant de corrélation, métriques et alertes : selon le besoin
+- Référence : `docs/LOGGING.md`
+
+## Workflow IA et validation
+- Fichiers du projet à examiner avant de coder : À définir
+- Contraintes de compatibilité et de périmètre : À définir
+- Vérifications réellement exécutables : À définir
+- Format de compte rendu / décisions d'architecture : À définir
+- Référence : `docs/AI_WORKFLOW.md`
+
 ## Commandes
 - Installation : À définir
 - Exécution : À définir
