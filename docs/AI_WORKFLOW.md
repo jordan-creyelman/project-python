@@ -1,5 +1,8 @@
 # Workflow pour assistants IA de développement Python
 
+## Activation du contexte
+Ce dépôt est une référence pour guider ChatGPT lors des demandes Python. Commencer par `CHATGPT_CONTEXT.md` lorsque l'utilisateur donne ce dépôt comme contexte. Ne pas supposer que le dépôt est automatiquement chargé dans les nouvelles conversations ; l'utilisateur doit fournir le lien ou son contenu.
+
 ## Contrat de travail
 L'assistant doit faire des changements utiles, petits, explicables, vérifiables et compatibles avec l'existant. Respecter `AGENTS.md` et lire les guides pertinents, pas tous les guides sans raison.
 
