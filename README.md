@@ -1,8 +1,16 @@
 # project-python
 
-Base de contexte pour développer des projets Python **de toute taille** sans surarchitecture.
+**Référentiel d'instructions pour guider ChatGPT lors de mes demandes de programmation Python**, de XS à XL, sans surarchitecture. Ce dépôt n'est pas un projet applicatif à exécuter.
+
+## Utiliser avec ChatGPT
+Dans une nouvelle conversation, écrire :
+
+> Utilise mon contexte Python : https://github.com/jordan-creyelman/project-python/blob/main/CHATGPT_CONTEXT.md. Lis-le, puis programme [décrire le besoin] en respectant ses règles.
+
+ChatGPT ne charge **pas automatiquement** ce dépôt dans toutes les nouvelles conversations : donner le lien ou le fichier au début d'une demande (ou l'inclure dans les instructions d'un projet ChatGPT, si disponible).
 
 ## Fichiers
+- [CHATGPT_CONTEXT.md](CHATGPT_CONTEXT.md) : **point d'entrée court recommandé pour ChatGPT** ; règles et consignes réutilisables.
 - [AGENTS.md](AGENTS.md) : instructions pour assistants de code et conventions générales (PEP 8, PEP 257, KISS, SOLID, YAGNI, DRY).
 - [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) : modèle à compléter pour chaque projet (objectif, taille, contraintes, architecture, tests).
 
@@ -15,11 +23,11 @@ Base de contexte pour développer des projets Python **de toute taille** sans su
 - [docs/LOGGING.md](docs/LOGGING.md) : événements, niveaux de logs et observabilité.
 - [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) : étapes et checklist pour les assistants de développement.
 
-## Comment commencer un projet
-1. Créer un dossier pour le projet (par ex. `projects/mon-outil/`) ou utiliser ces règles dans un dépôt Python dédié.
+## Pour un projet Python particulier
+1. Décrire le programme à ChatGPT en lui indiquant le lien vers `CHATGPT_CONTEXT.md`.
 2. Choisir la taille **XS**, **S**, **M** ou **L/XL** selon les besoins, pas seulement les lignes de code.
-3. Copier le modèle de contexte dans le projet et remplir uniquement les sections utiles.
-4. Demander à l'assistant : « Lis AGENTS.md et le contexte du projet, puis implémente le MVP avec la plus petite architecture adaptée. »
+3. Remplir `docs/PROJECT_CONTEXT.md` **uniquement si nécessaire** pour documenter des contraintes spécifiques.
+4. Demander à l'assistant de consulter `AGENTS.md` et les guides spécialisés pertinents, puis de coder le MVP avec l'architecture minimale.
 5. Garder les tests, la documentation et les dépendances proportionnels à la complexité.
 
 ## Philosophie
