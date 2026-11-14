@@ -1,8 +1,8 @@
 # AGENTS.md — Contexte de développement Python
 
 ## Mission
-Ce dépôt sert de base réutilisable pour créer des projets Python de tailles différentes.
-Avant toute modification, lire ce fichier, puis `docs/PROJECT_CONTEXT.md` s'il existe.
+Ce dépôt est un **contexte d'instructions pour guider ChatGPT et les assistants IA lors de demandes de programmation Python**, pas un squelette logiciel à installer.
+Commencer par [CHATGPT_CONTEXT.md](CHATGPT_CONTEXT.md) pour le contexte court. Utiliser le présent guide pour les détails ; `docs/PROJECT_CONTEXT.md` est un modèle **facultatif** pour un projet particulier.
 Répondre et documenter en français, sauf convention contraire d'un projet.
 
 ## Priorités (dans cet ordre)
