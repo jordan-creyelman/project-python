@@ -10,6 +10,11 @@ Base de contexte pour développer des projets Python **de toute taille** sans su
 - [docs/ERROR_HANDLING.md](docs/ERROR_HANDLING.md) : gestion des exceptions, validation, logs, défaillances externes, sécurité.
 - [docs/TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) : stratégie de tests unitaires, intégration, E2E, régression, contrats, sécurité et performance.
 
+- [docs/SECURITY.md](docs/SECURITY.md) : secrets, validation, injections, permissions et risques.
+- [docs/CONFIGURATION.md](docs/CONFIGURATION.md) : variables d'environnement, configuration typée, validations.
+- [docs/LOGGING.md](docs/LOGGING.md) : événements, niveaux de logs et observabilité.
+- [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) : étapes et checklist pour les assistants de développement.
+
 ## Comment commencer un projet
 1. Créer un dossier pour le projet (par ex. `projects/mon-outil/`) ou utiliser ces règles dans un dépôt Python dédié.
 2. Choisir la taille **XS**, **S**, **M** ou **L/XL** selon les besoins, pas seulement les lignes de code.
