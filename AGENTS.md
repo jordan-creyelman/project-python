@@ -133,3 +133,10 @@ Règles : commencer par un monolithe modulaire ; documenter les décisions struc
 ## Contexte spécifique à chaque nouveau projet
 Remplir `docs/PROJECT_CONTEXT.md` ou un fichier équivalent dans le sous-projet.
 Si une donnée manque, faire une hypothèse explicite et réversible ; ne pas inventer de contraintes.
+
+## Gestion des erreurs et stratégie de test
+- Lire et appliquer [docs/ERROR_HANDLING.md](docs/ERROR_HANDLING.md) pour la validation des entrées, les exceptions précises, les erreurs externes, la journalisation et les retries bornés.
+- Lire et appliquer [docs/TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) pour choisir les tests selon le risque : unitaires, intégration, E2E, contrats, régression, performance, sécurité et compatibilité.
+- À chaque fonctionnalité : vérifier le chemin nominal, les entrées invalides et les cas limites pertinents.
+- À chaque correction de bug : ajouter un test de régression quand c'est possible.
+- Ne jamais déclarer des tests réussis sans les avoir réellement exécutés.
