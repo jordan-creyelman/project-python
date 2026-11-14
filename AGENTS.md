@@ -140,3 +140,9 @@ Si une donnée manque, faire une hypothèse explicite et réversible ; ne pas in
 - À chaque fonctionnalité : vérifier le chemin nominal, les entrées invalides et les cas limites pertinents.
 - À chaque correction de bug : ajouter un test de régression quand c'est possible.
 - Ne jamais déclarer des tests réussis sans les avoir réellement exécutés.
+
+## Fonctions et conception modulaire
+- Lire et appliquer [docs/MODULAR_DESIGN.md](docs/MODULAR_DESIGN.md) : fonctions ciblées, signatures explicites, effets de bord maîtrisés, modules cohérents et dépendances simples.
+- Séparer la logique métier des entrées/sorties lorsque cela améliore la clarté ou les tests.
+- Préférer fonctions + composition ; créer des classes ou des couches seulement en présence d'un besoin réel.
+- Refactoriser selon la complexité observée, sans quotas arbitraires de lignes ou de modules.
