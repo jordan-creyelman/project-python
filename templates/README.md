@@ -28,6 +28,20 @@ résolues et sans workflow CI ; il faudra terminer ces étapes plus tard.
 
 Lire [PROJECT_AUTOMATION.md](../docs/PROJECT_AUTOMATION.md).
 
+## Configuration d'environnement uniquement si nécessaire
+
+Le générateur n'ajoute aucun `.env` par défaut. Pour un projet S/M
+nécessitant des paramètres d'exécution, activer `--with-env` :
+
+```bash
+uv run --no-project python scripts/create_project.py sensor-cli --size s --with-env
+```
+
+L'option fournit un `config.py` typé, un `.env.example` sûr et
+des tests pytest. Les variables sont préfixées avec le nom du projet
+(par exemple `SENSOR_CLI_TIMEOUT_SECONDS`). Voir
+[CONFIGURATION.md](../docs/CONFIGURATION.md).
+
 ## Créer son propre dépôt à partir d'un modèle
 
 1. Copier **le contenu** du dossier souhaité dans le nouveau dépôt.
