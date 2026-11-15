@@ -125,7 +125,11 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
     dev_dependencies = groups.get("dev", optional.get("dev", []))
     if not isinstance(dev_dependencies, list):
         dev_dependencies = []
-    names = {str(dep).split("[", 1)[0].split("=", 1)[0].split("<", 1)[0] for dep in dev_dependencies}
+    names = {
+        match.group(0).lower().replace("_", "-")
+        for dep in dev_dependencies
+        if (match := re.match(r"[A-Za-z0-9_.-]+", str(dep)))
+    }
     for tool in ("pytest", "ruff"):
         if tool not in names:
             level = "warning" if size == "s" else "error"

@@ -174,8 +174,17 @@ def create_project(
                     raise RuntimeError(f"uv lock failed:\n{exc.stderr}") from exc
 
         findings = check_project(staging)
-        errors = [finding.message for finding in findings if finding.level == "error"]
-        if errors and not (size == "m" and not ci and not lock):
+        waived = set()
+        if size == "m" and not ci:
+            waived.add("Add GitHub Actions CI for this project.")
+        if size == "m" and not lock:
+            waived.add("Commit uv.lock for a reproducible uv project.")
+        errors = [
+            finding.message
+            for finding in findings
+            if finding.level == "error" and finding.message not in waived
+        ]
+        if errors:
             raise ValueError("Generated project failed validation:\n" + "\n".join(errors))
         if destination.exists():
             raise FileExistsError(f"Destination already exists: {destination}")
