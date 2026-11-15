@@ -1,0 +1,36 @@
+# TEMPLATE: copy to .github/workflows/python-ci.yml in a Python code repository.
+# Adjust branches, Python version and install command to the actual project.
+name: Python CI
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Requires a dev extra containing ruff and pytest.
+          python -m pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Check format
+        run: ruff format --check .
+      - name: Test
+        run: python -m pytest -q

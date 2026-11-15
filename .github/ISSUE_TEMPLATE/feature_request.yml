@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a user-focused improvement
+title: "feat: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Who needs this and why?
+    validations:
+      required: true
+  - type: textarea
+    id: minimal_scope
+    attributes:
+      label: MVP scope
+      description: What is the smallest valuable solution?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] The user can ...
+        - [ ] Invalid input is handled ...
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope / alternatives
+      description: Optional trade-offs or postponed functionality.
