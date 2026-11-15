@@ -26,7 +26,9 @@ Il refuse les dossiers existants et n'accède pas à GitHub.
 Utiliser `--no-ci --no-lock` pour un simple squelette sans dépendances
 résolues et sans workflow CI ; il faudra terminer ces étapes plus tard.
 
-Lire [PROJECT_AUTOMATION.md](../docs/PROJECT_AUTOMATION.md).
+Lire [PROJECT_AUTOMATION.md](../docs/PROJECT_AUTOMATION.md) et la
+[convention README](../docs/README_STANDARDS.md) : les textes générés
+sont des points de départ à adapter au comportement réel du projet.
 
 ## Configuration d'environnement uniquement si nécessaire
 

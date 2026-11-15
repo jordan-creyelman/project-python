@@ -34,6 +34,10 @@ d'`uv lock`, le dossier temporaire est supprimé. Il n'accède pas à GitHub.
 | S | Package/CLI renommé, README, tests, Ruff/pytest, uv.lock et CI |
 | M | Package modulaire renommé, README, tests, Ruff/pytest, uv.lock et CI |
 
+Le générateur fournit un README initial en français, avec les
+commandes de ses modèles. Il doit être **adapté au besoin réel**
+du programme avant livraison : [README_STANDARDS.md](README_STANDARDS.md).
+
 Le fichier `.project-python.toml` enregistre la taille et la version
 des standards utilisés ; il n'installe aucun outil à lui seul.
 Avec `--with-env` pour S/M, il précise `environment-config = true`.

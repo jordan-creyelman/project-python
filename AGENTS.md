@@ -37,6 +37,18 @@ Sur un projet existant, lire son code et ses documents avant de le décrire ; di
 - **Sécurité** : aucune clé/API secret dans Git, validation des entrées externes, pas de `eval` ni d'exécution shell non justifiée, dépendances minimales.
 - **Configuration** : nommer les variables en anglais avec un préfixe de projet, protéger `.env` dans Git et réserver `.env.example` aux valeurs non sensibles. Pour S/M, n'activer `--with-env` que si la configuration est utile ; suivre [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
+## Convention README des projets
+
+Pour tout projet, créer ou maintenir un `README.md` utile et
+**proportionné à XS/S/M/L-XL**, en français par défaut sauf convention
+explicite du projet. Relever d'abord dans le code les commandes et
+fonctionnalités réelles, puis documenter installation, utilisation,
+tests et configuration uniquement lorsqu'ils s'appliquent.
+Actualiser la documentation lors d'un changement d'interface,
+de dépendances ou de comportement. Ne jamais inventer de résultats
+CI, de fonctionnalités ni de secrets ; préserver le README existant.
+Source de vérité : [docs/README_STANDARDS.md](docs/README_STANDARDS.md).
+
 ## Workflow uv — convention obligatoire pour les nouveaux projets
 
 - Par défaut, proposer uv comme gestionnaire d'environnement Python,
