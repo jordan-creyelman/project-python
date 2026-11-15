@@ -92,12 +92,16 @@ En XS/S, un simple `tests/test_core.py` suffit.
 
 ## Commandes usuelles (si outils installés)
 ```bash
+# Nouveau projet uv disposant de uv.lock et d'outils de test déclarés
+uv sync --locked
+uv run --locked python -m pytest
+uv run --locked python -m pytest -q
+uv run --locked ruff check .
+uv run --locked ruff format --check .
+
+# Projet existant n'utilisant pas uv : respecter ses commandes documentées
 python -m pytest
-python -m pytest -q
-python -m pytest tests/unit
-python -m pytest --maxfail=1
 ruff check .
-ruff format --check .
 ```
 Pour une mesure de couverture **facultative**, installer `pytest-cov` puis lancer `python -m pytest --cov=nom_du_projet --cov-report=term-missing`. Ne pas définir de seuil universel par défaut.
 
@@ -110,9 +114,9 @@ Pour une mesure de couverture **facultative**, installer `pytest-cov` puis lance
 | L/XL | Tous les types pertinents selon risques : contrat, E2E ciblés, sécurité, performance, compatibilité, CI multi-environnement |
 
 ## Pipeline CI minimal à adapter
-1. Installer les dépendances de test du projet.
-2. Vérifier `ruff check .` et `ruff format --check .`.
-3. Lancer `python -m pytest`.
+1. Pour un nouveau projet uv, synchroniser les dépendances via `uv sync --locked` avec un `uv.lock` commité ; pour l'existant, conserver la méthode installée.
+2. Vérifier `uv run --locked ruff check .` et `uv run --locked ruff format --check .` lorsque le projet est géré par uv.
+3. Lancer `uv run --locked python -m pytest` dans le projet uv.
 4. Ajouter typage, matrices Python, couverture et audits uniquement selon besoin.
 
 Ne pas activer une CI non fonctionnelle dans ce dépôt de documentation : créer les workflows lorsqu'un projet exécutable est ajouté.

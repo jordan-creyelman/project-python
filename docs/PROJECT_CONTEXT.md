@@ -22,6 +22,11 @@
 - Version Python : 3.12+ par défaut, à adapter
 - Plateformes : À définir
 - Entrées / sorties : À définir
+- Gestionnaire Python : **uv par défaut pour un nouveau projet** ; autre gestionnaire existant à respecter/justifier
+- Workflow uv : script XS simple / projet `pyproject.toml` + `uv.lock` selon taille
+- Commandes d'installation et test : `uv sync` et `uv run` si uv est adopté
+- Version Python et `uv.lock` : À définir ; migration éventuelle : À valider
+- Référence : `docs/UV_WORKFLOW.md`
 - Dépendances autorisées : bibliothèque standard d'abord
 - Bibliothèques/frameworks envisagés : adéquation et alternatives à préciser
 - Vérification des versions, maintenance, communauté et sécurité : source/date à renseigner si nécessaire
@@ -53,7 +58,7 @@
 - PR : facultatives / recommandées / requises ; revue et cible : À définir.
 - CI/CD : contrôles disponibles, déploiement et rollback : À définir.
 - Versioning : tags / SemVer / releases / changelog : À définir.
-- Dépendances : gestionnaire, pyproject, lockfile et mises à jour : À définir.
+- Dépendances : **uv par défaut**, pyproject, uv.lock et mises à jour : À définir ; préserver les outils existants sans migration validée.
 - Security Policy : versions supportées et canal privé réel : À définir.
 - Definition of Done : tests, documentation et critères de livraison : À définir.
 - ADR : décisions structurantes qui doivent être enregistrées : À définir.
@@ -127,9 +132,12 @@ simple copie de modèles. Adapter au contexte XS/S/M/L-XL.
 ## Commandes
 - Installation : À définir
 - Exécution : À définir
-- Tests : `pytest` (si configuré)
-- Lint : `ruff check .` (si installé)
-- Format : `ruff format --check .` (si installé)
+- Installation/synchronisation : `uv sync --locked` (si projet uv avec lockfile)
+- Tests : `uv run --locked python -m pytest` (si pytest et lockfile configurés)
+- Lint : `uv run --locked ruff check .` (si Ruff et lockfile configurés)
+- Format : `uv run --locked ruff format --check .` (idem)
+- Pour script XS sans projet/lockfile : `uv run script.py`
+- Pour dépôt existant non uv : documenter ses commandes réelles
 
 ## Plan de mise en œuvre
 1. Construire le plus petit chemin fonctionnel.

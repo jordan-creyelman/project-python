@@ -18,8 +18,15 @@ La criticité prime sur la taille : un script exposé à Internet peut exiger da
 Le fichier templates/github/workflows/python-ci.yml est un **modèle inactif** ici. Pour un vrai projet Python, le copier vers .github/workflows/python-ci.yml, puis :
 
 1. Adapter les branches main/dev et la version de Python.
-2. Vérifier que pyproject.toml contient un extra de développement nommé dev, ou changer la commande d'installation.
-3. S'assurer que Ruff et pytest sont disponibles et que les tests ciblent le code réel.
+2. Pour un nouveau projet uv, vérifier `pyproject.toml`, un groupe de
+   développement `dev` (par exemple `uv add --dev pytest ruff`) et
+   un `uv.lock` **commité** et cohérent. Si le projet existant utilise
+   un extra `dev`, adapter le modèle (`uv sync --extra dev --locked`)
+   au lieu de changer arbitrairement ses dépendances.
+3. Le modèle emploie `astral-sh/setup-uv`, `uv sync --locked` et
+   `uv run --locked`. Vérifier que Ruff/pytest sont déclarés et que
+   les tests ciblent le code réel. Sans `uv.lock`, ne pas utiliser
+   l'option `--locked` avant d'avoir généré et commité le fichier.
 4. Faire tourner le workflow sur une PR avant d'exiger son statut en protection de branche.
 5. Limiter les permissions du token et éviter les secrets sur du code de PR non fiable.
 6. Épingler les actions à des commits SHA complets si la politique de sécurité l'exige.

@@ -32,8 +32,24 @@ Sur un projet existant, lire son code et ses documents avant de le décrire ; di
 - **Composition plutôt qu'héritage** quand les deux sont possibles.
 - **Python idiomatique** : bibliothèque standard d'abord, `pathlib`, gestion explicite des erreurs, context managers, annotations de type aux frontières.
 - **Dépendances** : sélectionner outils et frameworks adaptés au besoin, stables, actuels, maintenus et soutenus par une communauté active et importante si possible ; vérifier versions, support et sécurité. Suivre [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md).
+- **Gestionnaire Python** : **uv par défaut** pour les nouveaux projets ; utiliser `uv run`, `uv add`, `uv sync` et `uv lock` selon la taille. Ne pas migrer automatiquement un dépôt utilisant un autre gestionnaire. Suivre [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md).
 - **Docstrings** : en **anglais** pour toute API publique nouvellement écrite ou modifiée ; PEP 257, détails utiles sans verbosité. Suivre [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md).
 - **Sécurité** : aucune clé/API secret dans Git, validation des entrées externes, pas de `eval` ni d'exécution shell non justifiée, dépendances minimales.
+
+## Workflow uv — convention obligatoire pour les nouveaux projets
+
+- Par défaut, proposer uv comme gestionnaire d'environnement Python,
+  dépendances et exécution ; ne pas recréer une chaîne `pip + venv`
+  si uv satisfait le besoin.
+- XS : `uv run script.py` suffit quand le script n'a pas de projet.
+- S : `pyproject.toml`, `uv add --dev pytest ruff` si tests/outils requis ;
+  un lockfile commité est recommandé pour un outil distribué en équipe.
+- M/L-XL : `uv.lock` commité, CI reproductible via `uv sync --locked`
+  et `uv run --locked`; version Python et dépendances contrôlées.
+- Ne pas toucher à la configuration/aux lockfiles d'un projet existant
+  sans analyse de l'installation actuelle et validation de migration.
+- Voir [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md) et
+  [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 
 ## Choisir la taille AVANT l'architecture
 La taille décrit la **complexité et les besoins**, pas seulement le nombre de fichiers.

@@ -20,9 +20,25 @@ Vérifier les faits récents sur la documentation officielle, PyPI et
 le dépôt source ; dater la vérification et signaler l'incertitude
 si les sources n'ont pas été consultées.
 
+## Gestionnaire recommandé : uv
+
+Le gestionnaire par défaut pour **tout nouveau projet Python** est
+[uv](UV_WORKFLOW.md) : `uv add`, `uv add --dev`, `uv remove`,
+`uv lock`, `uv sync`, `uv run`. Utiliser un **groupe dev**
+pour les outils de développement des nouveaux projets uv ; respecter
+les extras déjà présents dans les anciens projets.
+
+- `pyproject.toml` : dépendances directes et groupes.
+- `uv.lock` : recommandé pour un outil S et attendu pour M/L en équipe
+  ou en production ; commiter dans les projets concernés.
+- `.venv/` : ignorer dans Git.
+- CI reproductible : `uv sync --locked` seulement si `uv.lock` existe.
+- Dépôt existant : ne pas mélanger pip/Poetry/uv ou changer ses lockfiles
+  sans une migration explicitement validée.
+
 ## Règles
 
-1. Déclarer les dépendances de production dans pyproject.toml et les dépendances de développement dans un extra dev ou un groupe dédié ; choisir une seule méthode.
+1. Déclarer les dépendances de production dans pyproject.toml et, pour un nouveau projet uv, les outils de développement dans le groupe `dev` via `uv add --dev`. Préserver un extra dev déjà adopté par un dépôt existant ; choisir une seule méthode.
 2. Pour une **bibliothèque**, déclarer des plages de compatibilité raisonnables plutôt que figer toutes les dépendances transitives.
 3. Pour une **application**, enregistrer le lockfile si l'outil choisi en produit un et si cela sert la reproductibilité.
 4. Éviter de mélanger plusieurs gestionnaires de paquets ; documenter une commande d'installation canonique.

@@ -69,6 +69,30 @@ Corrige le problème sans changer les fonctionnalités non concernées.
 Ajoute un test de régression si pertinent et explique la correction.
 ```
 
+## Gestionnaire Python par défaut : uv
+
+Pour les **nouveaux projets Python**, le Tech Lead utilise
+[uv](https://docs.astral.sh/uv/) comme gestionnaire d'environnements,
+dépendances, scripts, tests et builds, **en adaptant l'outillage à la taille**.
+
+```bash
+# Petit script XS, sans projet packagé
+uv run script.py
+
+# Projet S/M/L existant configuré avec uv et uv.lock
+uv sync --locked
+uv run --locked pytest
+uv run --locked ruff check .
+uv run --locked ruff format --check .
+```
+
+Pour les nouveaux projets plus structurés : `uv init`, `uv add`,
+`uv add --dev`, `uv lock` et `uv build` si distribution nécessaire.
+Ne jamais imposer une migration à un dépôt existant sans évaluer sa
+configuration et ses contraintes.
+
+Lire le [guide uv complet](docs/UV_WORKFLOW.md).
+
 ## Convention GitHub pour les projets Python
 
 Les **noms de branches, messages de commit et titres de PR** sont en anglais.
@@ -156,6 +180,7 @@ Si le fichier GitHub change, demander à ChatGPT de le relire ; une copie déjà
 | [docs/LOGGING.md](docs/LOGGING.md) | Journalisation et diagnostic |
 | [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md) | Choix de bibliothèques/frameworks actuels et maintenus |
 | [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md) | Docstrings Python en anglais (PEP 257, style Google proportionné) |
+| [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md) | **uv par défaut** : création, dépendances, exécution, lockfile, builds, CI |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Stratégie GitHub XS/S/M/L-XL, branches, commits en anglais, PR et releases |
 | [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) | Méthode de travail, vérifications et compte rendu |
 | [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) | Modèle **facultatif** pour préciser un programme particulier |

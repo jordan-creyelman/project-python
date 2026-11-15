@@ -43,6 +43,17 @@ Pour un projet existant, lire les fichiers accessibles et expliquer l'existant a
 - Respecter la taille XS/S/M/L-XL : éviter les comparatifs artificiels
   et les refactorings de documentation hors périmètre.
 
+## Exécution Python — uv par défaut
+
+- Pour les nouveaux projets, utiliser [UV_WORKFLOW.md](UV_WORKFLOW.md) :
+  `uv init` si nécessaire, `uv add`, `uv run`, `uv sync` et
+  `uv lock` selon les besoins et la taille XS/S/M/L-XL.
+- Avant de modifier un dépôt existant, repérer gestionnaire, lockfiles,
+  environnement, installation et CI. **Pas de migration uv implicite**.
+- Lorsque uv est configuré avec un lockfile, privilégier
+  `uv sync --locked` et `uv run --locked` dans les validations ;
+  ne jamais prétendre avoir exécuté ces commandes sans outil disponible.
+
 ## GitHub : appliquer la stratégie proportionnée
 - Avant toute opération GitHub, lire [GIT_WORKFLOW.md](GIT_WORKFLOW.md) et
   inspecter les branches réellement présentes.
@@ -81,7 +92,10 @@ Lire seulement les guides concernés :
 
 ## 4. Vérifier
 - Ajouter ou ajuster tests nominaux, limites, erreurs et régressions, selon le risque.
-- Exécuter ce qui existe : `ruff check .`, `ruff format --check .`, `python -m pytest`, typage si configuré.
+- Exécuter les contrôles du projet : avec uv et un lockfile,
+  `uv run --locked ruff check .`, `uv run --locked ruff format --check .`,
+  `uv run --locked python -m pytest` ; sinon respecter les commandes
+  existantes (`ruff check .`, `python -m pytest`, etc.). Typage si configuré.
 - Ne pas déclarer un test « passé » sans résultat d'exécution ; si impossible, indiquer précisément pourquoi.
 - Vérifier imports, dépendances, erreurs, secrets, fichiers ajoutés et changements non demandés.
 - Une correction de bug devrait avoir un test de régression quand possible.

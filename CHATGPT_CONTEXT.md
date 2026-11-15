@@ -53,6 +53,23 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 - Guides : [sélection des bibliothèques](docs/LIBRARY_SELECTION.md)
   et [docstrings](docs/DOCSTRINGS.md).
 
+## Gestionnaire Python par défaut : uv
+
+- **Utiliser uv par défaut** pour les **nouveaux** projets Python :
+  environnement, version Python, dépendances, lockfile, exécution,
+  tests et builds (selon le besoin).
+- Préférer `uv run`, `uv add`, `uv sync`, `uv lock` et `uv build`
+  aux commandes dispersées de `pip`/`venv`/autres gestionnaires.
+- Adapter à la taille : un script XS autonome peut simplement utiliser
+  `uv run script.py`, sans créer un package ; en S/M/L utiliser
+  `pyproject.toml` et `uv.lock` quand la reproductibilité est utile.
+- Pour une CI sur projet uv avec lockfile validé, utiliser
+  `uv sync --locked` puis `uv run --locked` pour les contrôles.
+- **Ne pas migrer un dépôt existant sans examiner** ses fichiers,
+  dépendances, workflow et risques ; préserver la méthode actuelle
+  ou proposer une migration testée, jamais deux gestionnaires concurrents.
+- Guide : [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md).
+
 ## Git et GitHub — conventions de collaboration
 - **Branches et commits en anglais** ; commits au format **Conventional Commits** : `feat(cli): add interactive mode`, `fix(core): handle invalid input`.
 - `main` = version stable ; `dev` = intégration des projets M/L-XL quand nécessaire, facultative pour XS/S. Les branches temporaires portent un préfixe explicite (`feature/`, `fix/`, `hotfix/`, `docs/`, etc.).
@@ -105,6 +122,7 @@ Ne jamais générer des dossiers ou des couches juste pour respecter un schéma 
 - [Convention Git/GitHub](docs/GIT_WORKFLOW.md) — branches, commits, PR, CI et releases selon la taille du projet
 - [Sélection de bibliothèques et frameworks](docs/LIBRARY_SELECTION.md) — adéquation, fraîcheur, communauté, maintenance et alternatives
 - [Docstrings en anglais](docs/DOCSTRINGS.md) — PEP 257 et style Google si nécessaire
+- [Gestionnaire uv](docs/UV_WORKFLOW.md) — environnement, dépendances, lockfile, tests et CI
 - [Méthode IA](docs/AI_WORKFLOW.md)
 - [Contexte spécifique au projet](docs/PROJECT_CONTEXT.md) : **facultatif**, seulement si un projet mérite des contraintes propres.
 
