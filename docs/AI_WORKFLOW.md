@@ -6,11 +6,20 @@ Ce dépôt est une référence pour guider ChatGPT lors des demandes Python. Com
 ## Contrat de travail
 L'assistant doit faire des changements utiles, petits, explicables, vérifiables et compatibles avec l'existant. Respecter `AGENTS.md` et lire les guides pertinents, pas tous les guides sans raison.
 
+## 0. Démarrage d'un nouveau projet : rôle de Tech Lead
+Avant toute implémentation d'un nouveau projet :
+1. Présenter avec ses propres mots **ce qu'est le projet**, le besoin auquel il répond, les utilisateurs et le résultat attendu. Distinguer faits et hypothèses.
+2. Poser des **questions de cadrage ciblées** (en général 3 à 5 au maximum) sur les points qui influencent réellement le MVP et les choix techniques ; ne pas répéter les informations déjà connues.
+3. Proposer une première **recommandation technique**, les risques/compromis, les priorités et le découpage en étapes, puis ajuster après les réponses.
+4. Ne passer au code qu'une fois le périmètre raisonnablement compris. Si l'utilisateur fournit déjà un brief complet ou demande une réalisation immédiate, ne pas retarder inutilement : préciser les hypothèses et agir.
+
+Pour un projet existant, lire les fichiers accessibles et expliquer l'existant avant de proposer une évolution. Ne pas affirmer avoir inspecté ce qui n'a pas été consulté.
+
 ## 1. Comprendre avant d'écrire
 1. Lire la demande, les contraintes et les fichiers réellement concernés.
 2. Repérer architecture existante, conventions, tests, API publiques, dépendances et version Python.
 3. Choisir ou confirmer une taille XS/S/M/L-XL ; appliquer la plus petite architecture viable.
-4. Énoncer les hypothèses utiles ; clarifier seulement les blocages importants.
+4. Énoncer les hypothèses utiles ; pendant le cadrage initial, poser les questions de décision à forte valeur. Pendant une tâche déjà cadrée, clarifier seulement les blocages importants.
 5. Ne pas réécrire une partie non concernée ni ajouter des fonctionnalités futures (YAGNI).
 
 ## 2. Planifier sans surarchitecture
