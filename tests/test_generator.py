@@ -101,9 +101,6 @@ class TestProjectGenerator(unittest.TestCase):
             self.assertTrue((root / "scripts/check_project.py").exists())
 
 
-if __name__ == "__main__":
-    unittest.main()
-
     def test_opt_in_config_for_s_renames_prefix_and_tests(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = create_project(
@@ -180,3 +177,7 @@ if __name__ == "__main__":
                     for finding in check_project(root)
                 )
             )
+
+if __name__ == "__main__":
+    unittest.main()
+
