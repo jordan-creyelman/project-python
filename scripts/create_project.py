@@ -21,7 +21,7 @@ STANDARDS_VERSION = "0.2.0"
 SOURCE_ROOT = Path(__file__).resolve().parents[1]
 
 
-def _readme(name: str, size: str) -> str:
+def _readme(name: str, size: str, *, with_env: bool = False) -> str:
     """Generate a self-contained README without links to parent templates."""
     if size == "xs":
         instructions = """uv run main.py example.txt
@@ -46,7 +46,7 @@ uv run --locked ruff format --check .
 uv build"""
         purpose = "Modular task application separating domain, service, and storage."
 
-    return f"""# {name}
+    readme = f"""# {name}
 
 {purpose}
 
@@ -72,6 +72,26 @@ then run:
 
 See the [standard reference](https://github.com/jordan-creyelman/project-python/blob/main/docs/STANDARDS_INDEX.md).
 """
+    if with_env:
+        prefix = name.upper().replace("-", "_")
+        readme += f"""\n## Optional environment configuration
+
+The `src/{name.replace("-", "_")}/config.py` module validates optional
+runtime settings. Your application must explicitly call `load_settings()`
+if it needs them; the generated CLI does not load configuration by default.
+
+Local development, when settings are needed:
+
+```bash
+cp .env.example .env
+uv run --env-file .env --locked {name} --help
+```
+
+Use the `{prefix}_LOG_LEVEL` and `{prefix}_TIMEOUT_SECONDS` variables.
+Never commit `.env` or credentials. Deployment secrets require a secure
+environment variable or secret manager, not a source-controlled file.
+"""
+    return readme
 
 
 def _rewrite_names(root: Path, size: str, name: str) -> None:
@@ -102,6 +122,7 @@ def create_project(
     *,
     ci: bool = True,
     lock: bool = True,
+    with_env: bool = False,
 ) -> Path:
     """Create a project atomically, refusing unsafe names and existing paths.
 
@@ -115,6 +136,8 @@ def create_project(
         )
     if size not in SIZES:
         raise ValueError("Size must be xs, s, or m.")
+    if with_env and size == "xs":
+        raise ValueError("--with-env is supported only for S/M projects.")
 
     parent = parent.expanduser().resolve()
     if not parent.is_dir():
@@ -145,7 +168,22 @@ def create_project(
             ),
         )
         _rewrite_names(staging, size, name)
-        (staging / "README.md").write_text(_readme(name, size), encoding="utf-8")
+        if with_env:
+            package = name.replace("-", "_")
+            prefix = name.upper().replace("-", "_") + "_"
+            config_template = SOURCE_ROOT / "templates" / "config"
+            for source_name, target in (
+                ("config.py", staging / "src" / package / "config.py"),
+                ("test_config.py", staging / "tests" / "test_config.py"),
+                (".env.example", staging / ".env.example"),
+            ):
+                content = (config_template / source_name).read_text(encoding="utf-8")
+                content = content.replace("example_package", package)
+                content = content.replace("PROJECT_", prefix)
+                target.write_text(content, encoding="utf-8")
+        (staging / "README.md").write_text(
+            _readme(name, size, with_env=with_env), encoding="utf-8"
+        )
         (staging / ".project-python.toml").write_text(
             f'[project-python]\nsize = "{size}"\nstandards-version = "{STANDARDS_VERSION}"\n',
             encoding="utf-8",
@@ -209,6 +247,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--parent", type=Path, default=Path("."))
     parser.add_argument("--no-ci", action="store_true", help="Skip GitHub Actions CI.")
     parser.add_argument(
+        "--with-env",
+        action="store_true",
+        help="Add optional environment settings and tests (S/M only).",
+    )
+    parser.add_argument(
         "--no-lock", action="store_true", help="Skip generating uv.lock."
     )
     args = parser.parse_args(argv)
@@ -219,6 +262,7 @@ def main(argv: list[str] | None = None) -> int:
             args.parent,
             ci=not args.no_ci,
             lock=not args.no_lock,
+            with_env=args.with_env,
         )
     except (ValueError, FileExistsError, OSError, RuntimeError) as exc:
         parser.exit(2, f"Error: {exc}\n")

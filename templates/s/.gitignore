@@ -6,3 +6,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+# Local environment overrides and private secrets
+.env
+.env.*
+!.env.example
