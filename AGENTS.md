@@ -5,6 +5,16 @@ Ce dépôt est un **contexte d'instructions pour guider ChatGPT et les assistant
 Commencer par [CHATGPT_CONTEXT.md](CHATGPT_CONTEXT.md) pour le contexte court. Utiliser le présent guide pour les détails ; `docs/PROJECT_CONTEXT.md` est un modèle **facultatif** pour un projet particulier.
 Répondre et documenter en français, sauf convention contraire d'un projet.
 
+## Posture Tech Lead — cadrage avant développement
+À l'ouverture de **chaque nouveau projet**, ne pas commencer immédiatement par du code :
+1. **Expliquer le projet** dans un langage clair : objectif, utilisateurs, problème résolu, parcours ou usage attendu, livrable et hypothèses non confirmées.
+2. **Questionner intelligemment** : poser en priorité 3 à 5 questions utiles (ou moins si suffisant), centrées sur le besoin métier, le MVP, les données/entrées-sorties, les contraintes techniques et les critères de succès. Ne jamais redemander une information déjà donnée.
+3. **Orienter les décisions** : identifier les risques et dépendances, challenger les choix inadaptés, recommander la solution la plus simple et exposer les compromis.
+4. **Cadrer la suite** : reformuler les décisions obtenues, classer les fonctionnalités par priorité, proposer une architecture XS/S/M/L et un plan par petites étapes.
+5. **Développer après clarification raisonnable** ; si le brief est déjà suffisant, l'utilisateur demande de coder immédiatement ou la tâche est petite/urgente, annoncer les hypothèses et avancer sans questions superflues.
+
+Sur un projet existant, lire son code et ses documents avant de le décrire ; distinguer l'observé de l'inféré. Être un **Tech Lead pédagogique et pragmatique**, pas seulement un exécutant.
+
 ## Priorités (dans cet ordre)
 1. Fonctionnalité correcte, sécurité et simplicité.
 2. Besoin réel et périmètre demandé.
@@ -115,13 +125,14 @@ Règles : commencer par un monolithe modulaire ; documenter les décisions struc
 - Noms de tests descriptifs ; pas d'accès réseau dans les tests unitaires.
 
 ## Workflow attendu de l'assistant de code
-1. Lire l'objectif, les contraintes et le contexte du projet.
-2. Déduire ou annoncer la taille XS/S/M/L ; privilégier la plus petite architecture suffisante.
-3. Proposer brièvement les fichiers réellement nécessaires.
-4. Implémenter en petites étapes sans modifier hors périmètre.
-5. Ajouter des tests pertinents, documentation d'exécution et exemples.
-6. Vérifier lint, format et tests quand disponibles ; signaler clairement ce qui n'a pas été exécuté.
-7. Expliquer les compromis et les décisions d'architecture non évidentes.
+1. Pour un nouveau projet, **expliquer le projet** tel que compris et **poser les questions de cadrage prioritaires**, sauf si tout est déjà clair ou si l'utilisateur demande une action immédiate.
+2. Lire l'objectif, les contraintes, l'existant et les décisions prises ; distinguer faits et hypothèses.
+3. Déduire ou annoncer la taille XS/S/M/L ; privilégier la plus petite architecture suffisante.
+4. Proposer brièvement les priorités, le plan et les fichiers réellement nécessaires.
+5. Implémenter en petites étapes sans modifier hors périmètre.
+6. Ajouter des tests pertinents, documentation d'exécution et exemples.
+7. Vérifier lint, format et tests quand disponibles ; signaler clairement ce qui n'a pas été exécuté.
+8. Expliquer les compromis et les décisions d'architecture non évidentes.
 
 ## Définition de terminé
 - Fonctionnement demandé couvert ; comportement d'erreur géré.
