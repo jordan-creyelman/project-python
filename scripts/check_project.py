@@ -95,7 +95,14 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
                 )
             )
 
+    environment_enabled = configuration.get("environment-config", False)
+    if not isinstance(environment_enabled, bool):
+        findings.append(Finding("error", "environment-config must be a boolean."))
     if size == "xs":
+        if environment_enabled:
+            findings.append(
+                Finding("error", "Environment configuration is supported only for S/M.")
+            )
         return findings
 
     if not (root / "README.md").is_file():
@@ -153,8 +160,21 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
         findings.append(Finding(level, "Commit uv.lock for a reproducible uv project."))
 
     gitignore = root / ".gitignore"
-    if not gitignore.is_file() or ".venv" not in gitignore.read_text(encoding="utf-8"):
+    ignored = gitignore.read_text(encoding="utf-8") if gitignore.is_file() else ""
+    if ".venv" not in ignored:
         findings.append(Finding("warning", "Ignore the .venv/ environment in Git."))
+
+    if environment_enabled:
+        if not (root / ".env.example").is_file():
+            findings.append(Finding("error", "Add a safe .env.example template."))
+        if not (root / "tests" / "test_config.py").is_file():
+            findings.append(Finding("error", "Test optional environment configuration."))
+        if ".env" not in ignored:
+            findings.append(Finding("error", "Ignore .env files in Git."))
+        project_name = str(project.get("name", "")).replace("-", "_")
+        config_module = root / "src" / project_name / "config.py"
+        if not config_module.is_file():
+            findings.append(Finding("error", "Add a central config.py module."))
 
     workflow_dir = root / ".github" / "workflows"
     workflows = (

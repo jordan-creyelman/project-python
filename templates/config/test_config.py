@@ -1,5 +1,7 @@
 """Verify environment settings without modifying global process state."""
 
+import traceback
+
 import pytest
 
 from example_package.config import Settings, load_settings
@@ -31,6 +33,9 @@ def test_error_does_not_echo_input_value() -> None:
     with pytest.raises(ValueError) as error:
         load_settings({"PROJECT_TIMEOUT_SECONDS": private_value})
     assert private_value not in str(error.value)
+    assert private_value not in "".join(
+        traceback.format_exception(error.value)
+    )
 
 
 def test_use_process_environment_only_when_explicit(monkeypatch: pytest.MonkeyPatch) -> None:

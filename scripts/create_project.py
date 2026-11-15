@@ -17,7 +17,7 @@ else:
 
 NAME_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
 SIZES = ("xs", "s", "m")
-STANDARDS_VERSION = "0.2.0"
+STANDARDS_VERSION = "0.3.0"
 SOURCE_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -184,9 +184,14 @@ def create_project(
         (staging / "README.md").write_text(
             _readme(name, size, with_env=with_env), encoding="utf-8"
         )
+        marker = (
+            f'[project-python]\nsize = "{size}"\n'
+            f'standards-version = "{STANDARDS_VERSION}"\n'
+        )
+        if with_env:
+            marker += "environment-config = true\n"
         (staging / ".project-python.toml").write_text(
-            f'[project-python]\nsize = "{size}"\nstandards-version = "{STANDARDS_VERSION}"\n',
-            encoding="utf-8",
+            marker, encoding="utf-8"
         )
 
         if size != "xs":

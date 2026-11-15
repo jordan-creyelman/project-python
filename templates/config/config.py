@@ -37,8 +37,8 @@ def load_settings(environ: Mapping[str, str] | None = None) -> Settings:
     raw_timeout = values.get("PROJECT_TIMEOUT_SECONDS", "10").strip()
     try:
         timeout_seconds = int(raw_timeout)
-    except ValueError as exc:
-        raise ValueError("PROJECT_TIMEOUT_SECONDS must be an integer.") from exc
+    except ValueError:
+        raise ValueError("PROJECT_TIMEOUT_SECONDS must be an integer.") from None
     if not 1 <= timeout_seconds <= 300:
         raise ValueError("PROJECT_TIMEOUT_SECONDS must be between 1 and 300.")
 

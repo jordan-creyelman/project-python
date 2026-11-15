@@ -119,6 +119,10 @@ if __name__ == "__main__":
             self.assertIn("from sensor_cli.config import", test)
             self.assertFalse((root / ".env").exists())
             self.assertIn(".env", (root / ".gitignore").read_text())
+            self.assertIn(
+                "environment-config = true",
+                (root / ".project-python.toml").read_text(),
+            )
 
     def test_no_config_by_default(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -149,3 +153,20 @@ if __name__ == "__main__":
             self.assertRaisesRegex(ValueError, "S/M"),
         ):
             create_project("mini-script", "xs", Path(directory), with_env=True)
+
+
+    def test_validator_reports_missing_opt_in_env_template(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = create_project(
+                "sensor-cli", "s", Path(directory),
+                ci=False, lock=False, with_env=True,
+            )
+            (root / ".env.example").unlink()
+            from scripts.check_project import check_project
+
+            self.assertTrue(
+                any(
+                    "safe .env.example" in finding.message
+                    for finding in check_project(root)
+                )
+            )
