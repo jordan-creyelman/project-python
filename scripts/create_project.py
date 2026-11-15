@@ -24,7 +24,7 @@ SOURCE_ROOT = Path(__file__).resolve().parents[1]
 def _readme(name: str, size: str) -> str:
     """Generate a self-contained README without links to parent templates."""
     if size == "xs":
-        instructions = f"""uv run main.py example.txt
+        instructions = """uv run main.py example.txt
 uv run python -m unittest discover -s tests -v"""
         purpose = "Standalone Python script to count nonempty lines in a UTF-8 text file."
     elif size == "s":
@@ -56,17 +56,17 @@ standards v{STANDARDS_VERSION} (size {size.upper()}).
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/),
 then run:
 
-\`\`\`bash
+```bash
 {instructions}
-\`\`\`
+```
 
 ## Conventions
 
 - Python docstrings and Git commit messages: English.
 - Choose maintained libraries with an active community; standard library first.
 - Keep changes small, add meaningful tests, and use conventional commits.
-- With CI enabled, run \`python scripts/check_project.py --path . --strict\`.
-- \`uv.lock\` is committed for reproducible installations in S/M projects.
+- With CI enabled, run `python scripts/check_project.py --path . --strict`.
+- `uv.lock` is committed for reproducible installations in S/M projects.
 
 See the [standard reference](https://github.com/jordan-creyelman/project-python/blob/main/docs/STANDARDS_INDEX.md).
 """

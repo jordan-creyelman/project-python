@@ -56,8 +56,8 @@ def check_syntax(root: Path) -> list[str]:
         try:
             mapping = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
             if not isinstance(mapping, dict):
-                raise ValueError("expected a mapping")
-        except (yaml.YAMLError, ValueError) as exc:
+                raise TypeError("expected a mapping")
+        except (yaml.YAMLError, TypeError, ValueError) as exc:
             errors.append(f"{path.relative_to(root)}: YAML error: {exc}")
     for path in sorted(root.rglob("pyproject.toml")):
         try:

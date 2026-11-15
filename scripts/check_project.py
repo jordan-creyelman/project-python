@@ -36,7 +36,7 @@ def _read_config(root: Path) -> dict[str, object]:
         value = tomllib.load(stream)
     section = value.get("project-python", {})
     if not isinstance(section, dict):
-        raise ValueError("Invalid [project-python] section.")
+        raise TypeError("Invalid [project-python] section.")
     return section
 
 
@@ -63,7 +63,7 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
     findings: list[Finding] = []
     try:
         configuration = _read_config(root)
-    except (OSError, ValueError, tomllib.TOMLDecodeError) as exc:
+    except (OSError, TypeError, ValueError, tomllib.TOMLDecodeError) as exc:
         return [Finding("error", f"Invalid .project-python.toml: {exc}")]
 
     declared_size = configuration.get("size")

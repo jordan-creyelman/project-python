@@ -63,9 +63,11 @@ class TestProjectGenerator(unittest.TestCase):
             self.assertEqual(sentinel.read_text(), "preserve")
 
     def test_ci_cannot_be_enabled_without_lockfile(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            with self.assertRaisesRegex(ValueError, "requires"):
-                create_project("sensor-cli", "s", Path(directory), ci=True, lock=False)
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            self.assertRaisesRegex(ValueError, "requires"),
+        ):
+            create_project("sensor-cli", "s", Path(directory), ci=True, lock=False)
 
     def test_lock_failure_leaves_no_partial_project(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
