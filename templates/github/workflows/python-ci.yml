@@ -1,6 +1,8 @@
 # TEMPLATE ONLY. Copy to .github/workflows/python-ci.yml in a Python code repo.
 # Requires pyproject.toml, a committed uv.lock and pytest/Ruff in the dev group.
 # Adjust branches, supported Python versions and optional extras for the project.
+# For generated S/M repos, scripts/check_project.py and .project-python.toml
+# are copied into the target by scripts/create_project.py.
 name: Python CI (uv)
 
 on:
@@ -39,3 +41,5 @@ jobs:
         run: uv run --locked ruff format --check .
       - name: Run tests
         run: uv run --locked python -m pytest -q
+      - name: Check project conventions
+        run: uv run --locked python scripts/check_project.py --path . --strict

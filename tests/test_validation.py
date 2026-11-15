@@ -48,7 +48,9 @@ class TestDocumentationValidation(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "bad.py").write_text("def broken(:\n", encoding="utf-8")
-            self.assertTrue(any("Python error" in error for error in check_syntax(root)))
+            self.assertTrue(
+                any("Python error" in error for error in check_syntax(root))
+            )
 
 
 if __name__ == "__main__":

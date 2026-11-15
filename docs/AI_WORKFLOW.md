@@ -80,6 +80,15 @@ liés à la tâche ; ne pas recopier leurs règles dans plusieurs fichiers.
 6. Ne pas déclarer des workflows exécutés, protections activées ou releases
    publiées à partir de simples fichiers de documentation.
 
+## Générateur et contrôle des nouveaux projets
+
+Pour créer un projet XS/S/M, utiliser
+[PROJECT_AUTOMATION.md](PROJECT_AUTOMATION.md) et
+[create_project.py](../scripts/create_project.py). Pour un dépôt existant,
+n'appliquer le contrôle [check_project.py](../scripts/check_project.py)
+qu'après avoir identifié la taille et les conventions déjà présentes.
+Le validateur sert de garde-fou, **pas de preuve de qualité fonctionnelle**.
+
 ## 3. Implémenter
 - Faire de petites modifications cohérentes ; conserver le style du dépôt.
 - Valider les entrées externes, gérer erreurs prévues, ne pas masquer les exceptions.

@@ -70,6 +70,18 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
   ou proposer une migration testée, jamais deux gestionnaires concurrents.
 - Guide : [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md).
 
+## Automatisation de démarrage de projet
+
+Pour un **nouveau projet** XS/S/M, privilégier
+[le générateur](scripts/create_project.py) documenté dans
+[PROJECT_AUTOMATION.md](docs/PROJECT_AUTOMATION.md) : il prépare
+l'arborescence, la configuration uv et les contrôles adaptés.
+Pour un dépôt existant, ne pas imposer le générateur ou remplacer
+ses fichiers. Le validateur est une aide technique, non un jugement
+universel sur la qualité. Pour publier une version des standards,
+suivre [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md) sans publication
+automatique non demandée.
+
 ## Git et GitHub — conventions de collaboration
 - **Branches et commits en anglais** ; commits au format **Conventional Commits** : `feat(cli): add interactive mode`, `fix(core): handle invalid input`.
 - `main` = version stable ; `dev` = intégration des projets M/L-XL quand nécessaire, facultative pour XS/S. Les branches temporaires portent un préfixe explicite (`feature/`, `fix/`, `hotfix/`, `docs/`, etc.).

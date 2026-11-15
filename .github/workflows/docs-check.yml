@@ -25,6 +25,12 @@ jobs:
         run: uv run --no-project --python 3.12 --with 'pyyaml==6.0.3' python scripts/validate_repo.py
       - name: Test documentation validator
         run: uv run --no-project --python 3.12 --with 'pyyaml==6.0.3' python -m unittest discover -s tests -v
+      - name: Validate release metadata
+        run: uv run --no-project --python 3.12 python scripts/check_release.py --version "$(cat VERSION)"
+      - name: Lint and format validation scripts
+        run: |
+          uv run --no-project --python 3.12 --with 'ruff==0.17.5' ruff check scripts tests
+          uv run --no-project --python 3.12 --with 'ruff==0.17.5' ruff format --check scripts tests
       - name: Test XS script
         working-directory: templates/xs
         run: uv run --no-project --python 3.12 python -m unittest discover -s tests -v
@@ -46,3 +52,26 @@ jobs:
           uv run --locked ruff check .
           uv run --locked ruff format --check .
           uv build
+
+      - name: Generate and test renamed projects with uv
+        run: |
+          TEMP_PROJECTS=$(mktemp -d)
+          trap 'rm -rf "$TEMP_PROJECTS"' EXIT
+          uv run --no-project --python 3.12 python scripts/create_project.py sensor-cli --size s --parent "$TEMP_PROJECTS"
+          uv run --no-project --python 3.12 python scripts/create_project.py task-manager --size m --parent "$TEMP_PROJECTS"
+          (
+            cd "$TEMP_PROJECTS/sensor-cli"
+            uv sync --locked
+            uv run --locked python -m pytest -q
+            uv run --locked ruff check .
+            uv run --locked ruff format --check .
+            uv run --locked python scripts/check_project.py --path . --strict
+          )
+          (
+            cd "$TEMP_PROJECTS/task-manager"
+            uv sync --locked
+            uv run --locked python -m pytest -q
+            uv run --locked ruff check .
+            uv run --locked ruff format --check .
+            uv run --locked python scripts/check_project.py --path . --strict
+          )

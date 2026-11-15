@@ -9,6 +9,21 @@ ici avant publication d'une nouvelle version documentaire.
 ### Planned
 - Poursuivre les améliorations après retour d'expérience des projets réels.
 
+## [0.2.0] - 2026-11-15
+
+### Added
+- Générateur XS/S/M via uv : renommage automatique du package, README,
+  configuration de conventions, lockfile et CI par défaut pour S/M.
+- Contrôle portable des standards des projets selon leur taille,
+  intégré aux workflows des projets générés.
+- Tests unitaires et smoke tests des projets générés.
+- Procédure de publication GitHub Release manuelle, vérifiée
+  par VERSION, changelog et CI réussie sur le commit publié.
+
+### Changed
+- Documentation du générateur, de la validation et des releases.
+- Bump documentaire 0.1.0 → 0.2.0 (aucun tag créé automatiquement).
+
 ## [0.1.0] - 2026-11-15
 
 ### Added

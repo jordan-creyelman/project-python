@@ -10,6 +10,24 @@ pas selon le nombre de fichiers. Voir [les sources de vérité](../docs/STANDARD
 | [S](s/README.md) | Petite CLI empaquetée, logique séparée | `uv sync`, `uv run pytest`, Ruff |
 | [M](m/README.md) | Application légère à séparation domaine/I/O | `uv sync`, `uv run pytest`, Ruff |
 
+## Créer automatiquement le projet
+
+Depuis la racine de `project-python`, avec uv installé :
+
+```bash
+uv run --no-project python scripts/create_project.py sensor-cli --size s
+uv run --no-project python scripts/create_project.py task-manager --size m
+uv run --no-project python scripts/create_project.py line-counter --size xs
+```
+
+Pour S/M, le générateur **génère `uv.lock`, les contrôles
+des conventions et la CI**, en renommant le package et les imports.
+Il refuse les dossiers existants et n'accède pas à GitHub.
+Utiliser `--no-ci --no-lock` pour un simple squelette sans dépendances
+résolues et sans workflow CI ; il faudra terminer ces étapes plus tard.
+
+Lire [PROJECT_AUTOMATION.md](../docs/PROJECT_AUTOMATION.md).
+
 ## Créer son propre dépôt à partir d'un modèle
 
 1. Copier **le contenu** du dossier souhaité dans le nouveau dépôt.
