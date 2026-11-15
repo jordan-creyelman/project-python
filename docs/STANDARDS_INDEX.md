@@ -18,6 +18,7 @@ font autorité sur les détails de leur sujet**.
 | Gestionnaire uv | [UV_WORKFLOW.md](UV_WORKFLOW.md) |
 | Choix de bibliothèques | [LIBRARY_SELECTION.md](LIBRARY_SELECTION.md) |
 | Docstrings | [DOCSTRINGS.md](DOCSTRINGS.md) |
+| README des projets | [README_STANDARDS.md](README_STANDARDS.md) |
 | Tests | [TESTING_STRATEGY.md](TESTING_STRATEGY.md) |
 | Sécurité du code | [SECURITY.md](SECURITY.md) |
 | Divulgation de vulnérabilités | [SECURITY_POLICY.md](SECURITY_POLICY.md) |

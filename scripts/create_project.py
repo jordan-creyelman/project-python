@@ -17,79 +17,112 @@ else:
 
 NAME_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
 SIZES = ("xs", "s", "m")
-STANDARDS_VERSION = "0.3.0"
+STANDARDS_VERSION = "0.4.0"
 SOURCE_ROOT = Path(__file__).resolve().parents[1]
 
 
-def _readme(name: str, size: str, *, with_env: bool = False) -> str:
-    """Generate a self-contained README without links to parent templates."""
+def _readme(
+    name: str,
+    size: str,
+    *,
+    with_env: bool = False,
+    locked: bool = True,
+) -> str:
+    """Build a truthful, size-aware French README for the selected starter."""
     if size == "xs":
-        instructions = """uv run main.py example.txt
-uv run python -m unittest discover -s tests -v"""
-        purpose = (
-            "Standalone Python script to count nonempty lines in a UTF-8 text file."
-        )
-    elif size == "s":
-        instructions = f"""uv sync --locked
-uv run --locked {name} 5 0.02
-uv run --locked python -m pytest -q
-uv run --locked ruff check .
-uv run --locked ruff format --check .
-uv build"""
-        purpose = "Small, packaged Python CLI with pure calculation logic."
-    else:
-        instructions = f"""uv sync --locked
-uv run --locked {name} --file tasks.json "Review schematic"
-uv run --locked python -m pytest -q
-uv run --locked ruff check .
-uv run --locked ruff format --check .
-uv build"""
-        purpose = "Modular task application separating domain, service, and storage."
+        return f"""# {name}
 
-    readme = f"""# {name}
+Script Python autonome : compte les lignes non vides d'un fichier texte.
 
-{purpose}
+## Exécution
 
-Generated from [project-python](https://github.com/jordan-creyelman/project-python)
-standards v{STANDARDS_VERSION} (size {size.upper()}).
-
-## Run
-
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/),
-then run:
+Depuis ce dossier, avec [uv](https://docs.astral.sh/uv/) :
 
 ```bash
-{instructions}
+uv run main.py README.md
 ```
 
-## Conventions
+Pour vérifier le script :
 
-- Python docstrings and Git commit messages: English.
-- Choose maintained libraries with an active community; standard library first.
-- Keep changes small, add meaningful tests, and use conventional commits.
-- With CI enabled, run `python scripts/check_project.py --path . --strict`.
-- `uv.lock` is committed for reproducible installations in S/M projects.
+```bash
+uv run python -m unittest discover -s tests -v
+```
 
-See the [standard reference](https://github.com/jordan-creyelman/project-python/blob/main/docs/STANDARDS_INDEX.md).
+Adapter les exemples et les limites lorsque le script évolue.
+"""
+
+    summary = (
+        "Petite CLI de calcul de puissance électrique."
+        if size == "s"
+        else "Petite application de gestion de tâches stockées en JSON."
+    )
+    example = (
+        f"uv run --locked {name} 5 0.02"
+        if size == "s"
+        else f'uv run --locked {name} --file tasks.json "Review schematic"'
+    )
+    initial_lock = "" if locked else "uv lock\n"
+    readme = f"""# {name}
+
+{summary}
+
+Projet Python de taille {size.upper()} généré depuis
+[project-python](https://github.com/jordan-creyelman/project-python),
+standards v{STANDARDS_VERSION}. Le code est un point de départ à adapter
+aux besoins réels.
+
+## Prérequis
+
+- Python 3.12 ou supérieur ;
+- [uv](https://docs.astral.sh/uv/) pour gérer le projet.
+
+## Installation
+
+```bash
+{initial_lock}uv sync --locked
+```
+
+## Utilisation
+
+```bash
+{example}
+```
+
+## Tests et qualité
+
+```bash
+uv run --locked python -m pytest -q
+uv run --locked ruff check .
+uv run --locked ruff format --check .
+uv build
+```
+
+## Limites
+
+Il s'agit d'un exemple pédagogique, pas d'une application métier prête
+pour la production. Vérifier les entrées, les contraintes et les
+comportements attendus avant de le déployer. Ne pas annoncer des tests
+réussis sans les avoir exécutés.
 """
     if with_env:
         prefix = name.upper().replace("-", "_")
-        readme += f"""\n## Optional environment configuration
+        module = name.replace("-", "_")
+        readme += f"""
+## Configuration facultative
 
-The `src/{name.replace("-", "_")}/config.py` module validates optional
-runtime settings. Your application must explicitly call `load_settings()`
-if it needs them; the generated CLI does not load configuration by default.
+Le module `src/{module}/config.py` propose des paramètres typés et validés.
+**La CLI n'utilise pas ces paramètres automatiquement** : appeler
+`load_settings()` explicitement lorsque le programme en a besoin.
 
-Local development, when settings are needed:
+Pour essayer les valeurs locales (sans commiter `.env`) :
 
 ```bash
 cp .env.example .env
 uv run --env-file .env --locked {name} --help
 ```
 
-Use the `{prefix}_LOG_LEVEL` and `{prefix}_TIMEOUT_SECONDS` variables.
-Never commit `.env` or credentials. Deployment secrets require a secure
-environment variable or secret manager, not a source-controlled file.
+Variables : `{prefix}_LOG_LEVEL` et `{prefix}_TIMEOUT_SECONDS`.
+Ne jamais enregistrer de vrais secrets dans `.env.example`.
 """
     return readme
 
@@ -182,7 +215,7 @@ def create_project(
                 content = content.replace("PROJECT_", prefix)
                 target.write_text(content, encoding="utf-8")
         (staging / "README.md").write_text(
-            _readme(name, size, with_env=with_env), encoding="utf-8"
+            _readme(name, size, with_env=with_env, locked=lock), encoding="utf-8"
         )
         marker = (
             f'[project-python]\nsize = "{size}"\n'

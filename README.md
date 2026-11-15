@@ -5,7 +5,7 @@ Ce dépôt est **mon guide de programmation Python pour ChatGPT**. Il fournit de
 **Ce dépôt n'est pas une application Python à installer.** C'est un référentiel
 d'instructions et de modèles de démarrage, avec un validateur documentaire.
 
-**Version des standards :** [0.3.0](VERSION) ·
+**Version des standards :** [0.4.0](VERSION) ·
 [Changelog](CHANGELOG.md) ·
 [Sources de vérité](docs/STANDARDS_INDEX.md) ·
 [CI documentaire](.github/workflows/docs-check.yml).
@@ -158,6 +158,17 @@ Les secrets restent hors Git ; charger `.env` explicitement avec
 `uv run --env-file .env ...`. Voir
 [CONFIGURATION.md](docs/CONFIGURATION.md) et
 [le modèle](templates/config/README.md).
+
+## Convention README des projets
+
+Chaque nouveau projet reçoit un `README.md` **adapté à sa taille**,
+rédigé en français par défaut. Il décrit les fonctionnalités réelles,
+la méthode d'installation, les exemples d'utilisation et les vérifications
+à lancer. Le Tech Lead le maintient à jour quand le code évolue, sans
+inventer de commandes, de réussites CI ou de fonctionnalités.
+
+Voir la [convention README](docs/README_STANDARDS.md) pour la structure
+XS/S/M/L, les critères de qualité et la checklist de livraison.
 
 ## Validation automatique des conventions
 

@@ -53,6 +53,19 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 - Guides : [sélection des bibliothèques](docs/LIBRARY_SELECTION.md)
   et [docstrings](docs/DOCSTRINGS.md).
 
+## Documentation des projets : README obligatoire et utile
+
+Pour chaque projet Python, produire ou maintenir un `README.md`
+**adapté à sa taille** : XS minimal ; S/M avec démarrage, usages
+réels et vérifications ; L/XL avec liens vers la documentation détaillée.
+Rédiger en français par défaut, sauf langue demandée par le projet.
+Vérifier les noms de commandes et les sections applicables ; ne jamais
+inventer de fonctionnalité, de résultat de test ou de badge CI.
+Lors d'une modification du comportement, de la configuration ou de
+l'installation, mettre à jour le README sans écraser celui d'un
+projet existant par un modèle générique. Guide de référence :
+[docs/README_STANDARDS.md](docs/README_STANDARDS.md).
+
 ## Gestionnaire Python par défaut : uv
 
 - **Utiliser uv par défaut** pour les **nouveaux** projets Python :

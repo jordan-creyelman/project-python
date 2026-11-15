@@ -9,6 +9,19 @@ ici avant publication d'une nouvelle version documentaire.
 ### Planned
 - Poursuivre les améliorations après retour d'expérience des projets réels.
 
+## [0.4.0] - 2026-11-15
+
+### Added
+- Guide de référence pour les README de projets Python selon XS/S/M/L-XL,
+  langue par défaut, commandes réelles, configuration, tests et sécurité.
+- Checklist Tech Lead pour créer, relire et maintenir les README.
+- Tests du README généré par taille et avec configuration optionnelle.
+
+### Changed
+- README des projets XS/S/M générés en français par défaut.
+- Contexte ChatGPT, AGENTS, index de standards et DoD alignés.
+- Version documentaire des standards 0.3.0 → 0.4.0.
+
 ## [0.3.0] - 2026-11-15
 
 ### Added
