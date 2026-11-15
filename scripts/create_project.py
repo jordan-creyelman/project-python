@@ -190,9 +190,7 @@ def create_project(
         )
         if with_env:
             marker += "environment-config = true\n"
-        (staging / ".project-python.toml").write_text(
-            marker, encoding="utf-8"
-        )
+        (staging / ".project-python.toml").write_text(marker, encoding="utf-8")
 
         if size != "xs":
             portable_checker = staging / "scripts" / "check_project.py"

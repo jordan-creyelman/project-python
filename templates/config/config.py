@@ -32,7 +32,9 @@ def load_settings(environ: Mapping[str, str] | None = None) -> Settings:
     values = os.environ if environ is None else environ
     log_level = values.get("PROJECT_LOG_LEVEL", "INFO").strip().upper()
     if log_level not in ALLOWED_LOG_LEVELS:
-        raise ValueError("PROJECT_LOG_LEVEL must be DEBUG, INFO, WARNING, ERROR, or CRITICAL.")
+        raise ValueError(
+            "PROJECT_LOG_LEVEL must be DEBUG, INFO, WARNING, ERROR, or CRITICAL."
+        )
 
     raw_timeout = values.get("PROJECT_TIMEOUT_SECONDS", "10").strip()
     try:

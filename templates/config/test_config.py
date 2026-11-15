@@ -12,7 +12,9 @@ def test_defaults_when_variables_are_missing() -> None:
 
 
 def test_explicit_environment_values() -> None:
-    result = load_settings({"PROJECT_LOG_LEVEL": "debug", "PROJECT_TIMEOUT_SECONDS": "25"})
+    result = load_settings(
+        {"PROJECT_LOG_LEVEL": "debug", "PROJECT_TIMEOUT_SECONDS": "25"}
+    )
     assert result == Settings(log_level="DEBUG", timeout_seconds=25)
 
 
@@ -33,12 +35,12 @@ def test_error_does_not_echo_input_value() -> None:
     with pytest.raises(ValueError) as error:
         load_settings({"PROJECT_TIMEOUT_SECONDS": private_value})
     assert private_value not in str(error.value)
-    assert private_value not in "".join(
-        traceback.format_exception(error.value)
-    )
+    assert private_value not in "".join(traceback.format_exception(error.value))
 
 
-def test_use_process_environment_only_when_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_use_process_environment_only_when_explicit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setenv("PROJECT_TIMEOUT_SECONDS", "12")
     assert load_settings().timeout_seconds == 12
     assert load_settings({}).timeout_seconds == 10

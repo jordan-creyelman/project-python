@@ -168,7 +168,9 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
         if not (root / ".env.example").is_file():
             findings.append(Finding("error", "Add a safe .env.example template."))
         if not (root / "tests" / "test_config.py").is_file():
-            findings.append(Finding("error", "Test optional environment configuration."))
+            findings.append(
+                Finding("error", "Test optional environment configuration.")
+            )
         if ".env" not in ignored:
             findings.append(Finding("error", "Ignore .env files in Git."))
         project_name = str(project.get("name", "")).replace("-", "_")

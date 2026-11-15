@@ -104,12 +104,15 @@ class TestProjectGenerator(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-
     def test_opt_in_config_for_s_renames_prefix_and_tests(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = create_project(
-                "sensor-cli", "s", Path(directory),
-                ci=False, lock=False, with_env=True,
+                "sensor-cli",
+                "s",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
             )
             config = (root / "src" / "sensor_cli" / "config.py").read_text()
             env_example = (root / ".env.example").read_text()
@@ -135,8 +138,12 @@ if __name__ == "__main__":
     def test_opt_in_config_for_m(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = create_project(
-                "task-manager", "m", Path(directory),
-                ci=False, lock=False, with_env=True,
+                "task-manager",
+                "m",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
             )
             self.assertIn(
                 "TASK_MANAGER_LOG_LEVEL",
@@ -154,12 +161,15 @@ if __name__ == "__main__":
         ):
             create_project("mini-script", "xs", Path(directory), with_env=True)
 
-
     def test_validator_reports_missing_opt_in_env_template(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = create_project(
-                "sensor-cli", "s", Path(directory),
-                ci=False, lock=False, with_env=True,
+                "sensor-cli",
+                "s",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
             )
             (root / ".env.example").unlink()
             from scripts.check_project import check_project
