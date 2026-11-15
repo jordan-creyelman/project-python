@@ -44,6 +44,23 @@
 - Tags et releases : À définir
 - Référence : `docs/GIT_WORKFLOW.md`
 
+## Conventions GitHub et livraison du projet
+
+- Issues : aucune / bugs / backlog ; critères d'acceptation : À définir.
+- PR : facultatives / recommandées / requises ; revue et cible : À définir.
+- CI/CD : contrôles disponibles, déploiement et rollback : À définir.
+- Versioning : tags / SemVer / releases / changelog : À définir.
+- Dépendances : gestionnaire, pyproject, lockfile et mises à jour : À définir.
+- Security Policy : versions supportées et canal privé réel : À définir.
+- Definition of Done : tests, documentation et critères de livraison : À définir.
+- ADR : décisions structurantes qui doivent être enregistrées : À définir.
+- Guides : GITHUB_ISSUES.md, PULL_REQUESTS.md, CI_CD_STRATEGY.md,
+  VERSIONING.md, DEPENDENCIES.md, SECURITY_POLICY.md,
+  DEFINITION_OF_DONE.md et ADR.md (tous dans docs/).
+
+Ne pas mettre en place des automatisations ou procédures fictives par
+simple copie de modèles. Adapter au contexte XS/S/M/L-XL.
+
 ## Conception modulaire
 - Responsabilités principales des fonctions : À définir
 - Modules nécessaires actuellement : À définir

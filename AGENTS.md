@@ -110,6 +110,26 @@ Règles : commencer par un monolithe modulaire ; documenter les décisions struc
 - Branches temporaires : `feature/*`, `fix/*`, `hotfix/*`, `docs/*`, `refactor/*`, `test/*`, `chore/*` ; `release/*` uniquement si justifiée.
 - Avant de créer des branches, PR ou commits, examiner le workflow existant et le respecter. Ne pas changer les protections GitHub ou le modèle de branches sans validation.
 
+## Huit conventions de qualité et de livraison
+
+Appliquer les règles utiles selon la taille, l'exposition et la criticité :
+[Issues](docs/GITHUB_ISSUES.md),
+[PR](docs/PULL_REQUESTS.md),
+[CI/CD](docs/CI_CD_STRATEGY.md),
+[Versioning](docs/VERSIONING.md),
+[Dépendances](docs/DEPENDENCIES.md),
+[Security Policy](docs/SECURITY_POLICY.md),
+[Definition of Done](docs/DEFINITION_OF_DONE.md) et
+[ADR](docs/ADR.md).
+
+- XS : contrôle léger et traçabilité sans formalisme imposé.
+- S : PR courtes et CI légère si cela apporte une valeur réelle.
+- M : PR, CI, traçabilité des versions et ADR pour décisions structurantes.
+- L/XL : validations, revues, sécurité, contrat, rollback et ADR adaptés.
+- Ne jamais confondre un modèle présent avec une intégration activée.
+- Avant toute livraison, rapporter les tests **réellement exécutés** et les
+  résultats constatés ; ne pas inventer de statut CI, release ou approbation.
+
 ## Règles de décision
 - Une fonction simple est préférable à une classe sans état.
 - Une classe est pertinente si état + invariants, ou comportement polymorphe réel.

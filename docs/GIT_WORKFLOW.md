@@ -214,3 +214,11 @@ Avant toute action GitHub :
 
 **Règle directrice : la fiabilité et la clarté priment sur la complexité
 du processus.**
+
+## 8. Conventions complémentaires
+
+Le workflow Git s'appuie sur les guides [Issues](GITHUB_ISSUES.md),
+[PR](PULL_REQUESTS.md), [CI/CD](CI_CD_STRATEGY.md),
+[Versioning](VERSIONING.md), [Dépendances](DEPENDENCIES.md),
+[Security Policy](SECURITY_POLICY.md), [Definition of Done](DEFINITION_OF_DONE.md)
+et [ADR](ADR.md).

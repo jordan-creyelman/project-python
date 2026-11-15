@@ -88,6 +88,33 @@ avec la complexité et le risque.
 
 Lire la [convention Git et GitHub complète](docs/GIT_WORKFLOW.md).
 
+## Huit conventions de qualité et de collaboration
+
+Ces conventions **complètent** la stratégie Git et GitHub et s'adaptent à la
+taille **XS/S/M/L-XL** et au risque du projet :
+
+1. [Gestion des issues](docs/GITHUB_ISSUES.md) : bugs, fonctionnalités, priorités et critères d'acceptation.
+2. [Pull requests](docs/PULL_REQUESTS.md) : description, revue et vérifications.
+3. [CI/CD](docs/CI_CD_STRATEGY.md) : automatisation des contrôles et livraison maîtrisée.
+4. [Versioning](docs/VERSIONING.md) : SemVer, tags, releases et changelog.
+5. [Dépendances](docs/DEPENDENCIES.md) : pyproject.toml, versions et Dependabot.
+6. [Security Policy](docs/SECURITY_POLICY.md) : signalement privé, triage et correction.
+7. [Definition of Done](docs/DEFINITION_OF_DONE.md) : critères avant livraison.
+8. [ADR](docs/ADR.md) : documentation des choix structurants.
+
+**Modèles prêts à adapter :** [Issues](.github/ISSUE_TEMPLATE/),
+[Pull Request](.github/PULL_REQUEST_TEMPLATE.md),
+[CI Python](templates/github/workflows/python-ci.yml),
+[Dependabot](templates/github/dependabot.yml),
+[Security Policy](templates/SECURITY.md),
+[ADR](templates/adr/0000-template.md),
+[Changelog](templates/CHANGELOG.md).
+
+Les modèles d'issues et de PR sont actifs pour ce dépôt de documentation.
+Les fichiers sous **templates/** ne sont pas actifs : les copier et adapter
+dans chaque projet Python concerné. Aucun workflow CI de Python ni déploiement
+automatique n'est activé dans project-python.
+
 ## Utilisation sur plusieurs conversations
 
 **Important : le dépôt GitHub n'est pas automatiquement chargé dans toutes les conversations ChatGPT.**

@@ -123,3 +123,8 @@ Ne pas activer une CI non fonctionnelle dans ce dépôt de documentation : crée
 - Les erreurs et limites importantes sont testées.
 - Pas de tests dépendants du réseau ou du temps non contrôlés.
 - Les tests sont exécutés ou leur non-exécution est signalée explicitement.
+
+## Automatisation et critères de livraison
+
+Adapter les vérifications aux risques selon [CI_CD_STRATEGY.md](CI_CD_STRATEGY.md)
+et [DEFINITION_OF_DONE.md](DEFINITION_OF_DONE.md).

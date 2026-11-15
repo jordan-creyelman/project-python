@@ -39,6 +39,26 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 - Adapter PR, revues, CI, protections et releases à la **taille et au risque** du projet ; ne pas imposer GitFlow complet aux petits outils.
 - Avant de modifier un dépôt, lire [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md), vérifier ses branches et respecter les conventions existantes. Ne pas créer `dev` ni modifier les protections sans accord.
 
+## Huit conventions de pilotage GitHub — seulement si pertinentes
+
+Pour tout projet GitHub, sélectionner et adapter les conventions :
+[Issues](docs/GITHUB_ISSUES.md),
+[Pull requests](docs/PULL_REQUESTS.md),
+[CI/CD](docs/CI_CD_STRATEGY.md),
+[Versioning](docs/VERSIONING.md),
+[Dépendances](docs/DEPENDENCIES.md),
+[Security Policy](docs/SECURITY_POLICY.md),
+[Definition of Done](docs/DEFINITION_OF_DONE.md) et
+[ADR](docs/ADR.md).
+
+- **XS** : pas de bureaucratie ; tests et documentation seulement si utiles.
+- **S** : issues/PR et CI légère recommandées selon l'usage.
+- **M** : PR et CI, versions traçables et décisions structurantes documentées.
+- **L/XL** : revues, contrôles, sécurité et ADR renforcés selon l'impact.
+- Ne jamais activer automatiquement un workflow, un bot, des protections, une
+  publication ou un canal de signalement fictif sur un autre dépôt.
+- Les modèles GitHub de ce référentiel sont à adapter au projet ; voir README.
+
 ## Taille du projet (à déduire sans demander inutilement)
 - **XS** : petit script ou exercice ; un fichier peut suffire.
 - **S** : outil CLI/bibliothèque légère ; quelques modules ciblés.

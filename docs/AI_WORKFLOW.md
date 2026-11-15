@@ -41,6 +41,22 @@ Pour un projet existant, lire les fichiers accessibles et expliquer l'existant a
 - Pour une correction urgente de production, partir de `main` et
   synchroniser ensuite `dev` si elle existe.
 
+## Choisir les conventions GitHub utiles
+
+Lire seulement les guides concernés :
+[Issues](GITHUB_ISSUES.md), [PR](PULL_REQUESTS.md),
+[CI/CD](CI_CD_STRATEGY.md), [Versioning](VERSIONING.md),
+[Dépendances](DEPENDENCIES.md), [Security Policy](SECURITY_POLICY.md),
+[Definition of Done](DEFINITION_OF_DONE.md), [ADR](ADR.md).
+
+1. Identifier taille XS/S/M/L-XL, risques, règles actuelles et droits d'accès.
+2. Formaliser les besoins en issues et critères d'acceptation si cela aide.
+3. Choisir branche, PR et contrôles adaptés au projet réel.
+4. Évaluer dépendances et sécurité ; définir les critères de livraison.
+5. Préparer version et ADR uniquement lorsqu'ils servent une décision ou livraison.
+6. Ne pas déclarer des workflows exécutés, protections activées ou releases
+   publiées à partir de simples fichiers de documentation.
+
 ## 3. Implémenter
 - Faire de petites modifications cohérentes ; conserver le style du dépôt.
 - Valider les entrées externes, gérer erreurs prévues, ne pas masquer les exceptions.

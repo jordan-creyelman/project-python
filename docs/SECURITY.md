@@ -49,3 +49,8 @@ Pour une URL contrôlée par un utilisateur, ajouter une défense SSRF adaptée 
 - L/XL : modélisation de menaces, automatisation des contrôles et surveillance selon exposition.
 
 Ne pas installer un scanner, une politique complexe ou des couches de sécurité décoratives sans risque identifiable.
+
+## Signalement et divulgation de vulnérabilités
+
+La procédure de signalement confidentiel, de triage et de correction
+est définie dans [SECURITY_POLICY.md](SECURITY_POLICY.md).
