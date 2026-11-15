@@ -31,6 +31,14 @@ Le fichier templates/github/workflows/python-ci.yml est un **modèle inactif** i
 5. Limiter les permissions du token et éviter les secrets sur du code de PR non fiable.
 6. Épingler les actions à des commits SHA complets si la politique de sécurité l'exige.
 
+## Conventions d'un projet généré
+
+Le [générateur](../scripts/create_project.py) installe dans les projets
+S/M le [contrôle portable](../scripts/check_project.py) et une copie du
+workflow Python qui l'exécute. Le contrôle couvre les propriétés
+déterministes (config, lockfile, tests, CI) ; il ne remplace pas les
+tests du logiciel, la revue ni les audits de sécurité.
+
 ## Critères
 
 - Une CI rédigée mais non activée n'est pas une CI exécutée.

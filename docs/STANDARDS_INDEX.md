@@ -27,6 +27,8 @@ font autorité sur les détails de leur sujet**.
 | Erreurs, configuration et logs | [ERROR_HANDLING.md](ERROR_HANDLING.md), [CONFIGURATION.md](CONFIGURATION.md), [LOGGING.md](LOGGING.md) |
 | Procédure de travail IA | [AI_WORKFLOW.md](AI_WORKFLOW.md) |
 | Contexte propre à un projet | [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) |
+| Génération et validation des nouveaux projets | [PROJECT_AUTOMATION.md](PROJECT_AUTOMATION.md) |
+| Publication des versions du référentiel | [RELEASE_PROCESS.md](RELEASE_PROCESS.md) |
 
 ## Maintenir les conventions sans duplication
 
@@ -46,6 +48,8 @@ font autorité sur les détails de leur sujet**.
 ## Modèles
 
 - [Exemples de démarrage](../templates/README.md) : XS, S et M.
+- [Générateur](../scripts/create_project.py) et
+  [contrôle portable](../scripts/check_project.py) des nouveaux projets.
 - [Modèle CI Python](../templates/github/workflows/python-ci.yml) :
   à copier dans un vrai projet, pas dans ce dépôt documentaire.
 - Les modèles sont **des points de départ**, pas une structure imposée.

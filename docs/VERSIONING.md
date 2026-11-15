@@ -27,4 +27,11 @@ Exemples de tags : v0.1.0 pour un MVP, v0.2.0 pour une fonctionnalité, v0.2.1 p
 4. Publier une GitHub Release si les utilisateurs en ont besoin.
 5. Prévoir revert ou hotfix en cas de régression ; synchroniser dev si elle existe.
 
-Le modèle templates/CHANGELOG.md peut être copié et simplifié selon le projet. Les tags, releases et publications exigent une action explicite ; cette convention ne les crée pas.
+Le modèle [templates/CHANGELOG.md](../templates/CHANGELOG.md) peut être
+copié et simplifié selon le projet.
+
+Pour les versions **du référentiel project-python**, utiliser
+[RELEASE_PROCESS.md](RELEASE_PROCESS.md) : le workflow GitHub
+[release.yml](../.github/workflows/release.yml) exige un déclenchement
+manuel, une version cohérente et une CI réussie. Une modification du
+changelog ne publie rien toute seule.

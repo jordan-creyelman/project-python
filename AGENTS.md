@@ -51,6 +51,16 @@ Sur un projet existant, lire son code et ses documents avant de le décrire ; di
 - Voir [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md) et
   [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 
+## Génération automatisée des nouveaux projets
+
+Consulter [PROJECT_AUTOMATION.md](docs/PROJECT_AUTOMATION.md) et
+[create_project.py](scripts/create_project.py) : pour XS/S/M, un
+générateur permet de créer le squelette, le lockfile uv et une CI
+proportionnée. Ne pas remplacer les fichiers d'un projet existant.
+La conformité statique se contrôle avec
+[check_project.py](scripts/check_project.py) ; les vérifications
+fonctionnelles et les revues restent indispensables.
+
 ## Choisir la taille AVANT l'architecture
 La taille décrit la **complexité et les besoins**, pas seulement le nombre de fichiers.
 Ne pas imposer une architecture grande taille à un petit script.

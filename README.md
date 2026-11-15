@@ -5,7 +5,7 @@ Ce dépôt est **mon guide de programmation Python pour ChatGPT**. Il fournit de
 **Ce dépôt n'est pas une application Python à installer.** C'est un référentiel
 d'instructions et de modèles de démarrage, avec un validateur documentaire.
 
-**Version des standards :** [0.1.0](VERSION) ·
+**Version des standards :** [0.2.0](VERSION) ·
 [Changelog](CHANGELOG.md) ·
 [Sources de vérité](docs/STANDARDS_INDEX.md) ·
 [CI documentaire](.github/workflows/docs-check.yml).
@@ -113,6 +113,37 @@ Les exemples S/M utilisent `uv` et exigent de **générer puis commiter
 [CI Python](templates/github/workflows/python-ci.yml). Ce dépôt garde
 les modèles génériques sans lockfile imposé.
 
+## Générer un projet et vérifier ses conventions
+
+Le générateur [create_project.py](scripts/create_project.py) copie et
+adapte les modèles XS, S et M : nom du projet, nom du package, imports,
+README et fichier `.project-python.toml` contenant taille et version.
+Pour S/M, il génère par défaut **`uv.lock` et la CI GitHub Actions** ;
+il faut donc avoir installé uv. Il ne crée aucun dépôt GitHub distant.
+
+```bash
+# Depuis project-python : crée ./sensor-cli/
+uv run --no-project python scripts/create_project.py sensor-cli --size s
+
+# Exemple modulaire de taille M
+uv run --no-project python scripts/create_project.py task-manager --size m
+
+# Sans réseau ni CI, pour un squelette à compléter manuellement
+uv run --no-project python scripts/create_project.py prototype --size xs
+uv run --no-project python scripts/create_project.py sensor-cli --size s --no-ci --no-lock
+
+# Vérifier les conventions d'un projet généré
+python sensor-cli/scripts/check_project.py --path sensor-cli --strict
+```
+
+Le contrôle [check_project.py](scripts/check_project.py) vérifie la
+présence des fichiers, le packaging, les tests, le lockfile et la CI
+selon XS/S/M/L. Il ne prétend pas mesurer automatiquement la
+maintenabilité d'une bibliothèque ni la qualité linguistique des docstrings.
+Les projets S/M générés embarquent ce script et le lancent en CI.
+
+Lire le [guide d'automatisation](docs/PROJECT_AUTOMATION.md).
+
 ## Validation automatique des conventions
 
 Un workflow GitHub Actions de documentation contrôle désormais les liens
@@ -124,9 +155,10 @@ uv run --no-project --with 'pyyaml==6.0.3' python scripts/validate_repo.py
 ```
 
 Voir le [validateur](scripts/validate_repo.py) et les
-[tests](tests/test_validation.py). Les workflows de déploiement ou de
-publication restent absents : seuls les **contrôles documentaires et les
-exemples** sont exécutés ici.
+[tests](tests/test_validation.py). La CI vérifie aussi la génération de
+projets et la cohérence des versions. Une publication des standards est
+disponible **uniquement sur déclenchement manuel**, selon
+[RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md).
 
 ## Convention GitHub pour les projets Python
 
@@ -172,10 +204,11 @@ document fait autorité sur chaque sujet :
 [Changelog](templates/CHANGELOG.md).
 
 Les modèles d'issues et de PR sont actifs pour ce dépôt. Les modèles
-sous **templates/** ne s'exécutent pas automatiquement dans d'autres
-dépôts : il faut les copier et adapter. Le workflow
-[docs-check.yml](.github/workflows/docs-check.yml) valide ce référentiel
-et ses exemples ; **aucun déploiement ni publication automatique** n'existe.
+sous **templates/** peuvent être copiés manuellement ou via le
+[générateur](scripts/create_project.py). Le workflow
+[docs-check.yml](.github/workflows/docs-check.yml) valide ce référentiel,
+ses exemples et le générateur. Les releases restent
+[manuelles et contrôlées](docs/RELEASE_PROCESS.md).
 
 ## Conventions de choix technique et de documentation du code
 
@@ -219,6 +252,8 @@ Si le fichier GitHub change, demander à ChatGPT de le relire ; une copie déjà
 | [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md) | Choix de bibliothèques/frameworks actuels et maintenus |
 | [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md) | Docstrings Python en anglais (PEP 257, style Google proportionné) |
 | [docs/STANDARDS_INDEX.md](docs/STANDARDS_INDEX.md) | Sources de vérité de chaque convention ; éviter les doublons |
+| [docs/PROJECT_AUTOMATION.md](docs/PROJECT_AUTOMATION.md) | Générateur XS/S/M et vérification portable des conventions |
+| [docs/RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md) | Versionner et publier les standards de manière contrôlée |
 | [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md) | **uv par défaut** : création, dépendances, exécution, lockfile, builds, CI |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Stratégie GitHub XS/S/M/L-XL, branches, commits en anglais, PR et releases |
 | [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) | Méthode de travail, vérifications et compte rendu |
