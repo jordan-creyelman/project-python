@@ -110,8 +110,11 @@ Le [modèle CI](../templates/github/workflows/python-ci.yml) utilise
 avec `pyproject.toml`, `uv.lock` et les outils de test déclarés. Vérifier
 le support Python et adapter les groupes de dépendances et extras.
 
-Ne pas ajouter de workflow actif à `project-python`, qui reste un dépôt
-d'instructions. Respecter [CI_CD_STRATEGY.md](CI_CD_STRATEGY.md).
+Le workflow [docs-check.yml](../.github/workflows/docs-check.yml)
+vérifie les documents et les exemples sans transformer `project-python`
+en application déployable. Les pipelines applicatifs restent réservés
+aux dépôts qui utilisent les modèles. Respecter
+[CI_CD_STRATEGY.md](CI_CD_STRATEGY.md).
 
 ## Sources officielles
 

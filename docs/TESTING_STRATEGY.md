@@ -119,7 +119,10 @@ Pour une mesure de couverture **facultative**, installer `pytest-cov` puis lance
 3. Lancer `uv run --locked python -m pytest` dans le projet uv.
 4. Ajouter typage, matrices Python, couverture et audits uniquement selon besoin.
 
-Ne pas activer une CI non fonctionnelle dans ce dépôt de documentation : créer les workflows lorsqu'un projet exécutable est ajouté.
+Le dépôt de documentation dispose d'une
+[CI de validation](../.github/workflows/docs-check.yml) distincte des
+CI Python propres aux projets applicatifs ; elle vérifie les liens,
+la syntaxe et l'exécution des modèles XS/S/M.
 
 ## Critères d'acceptation
 - Les scénarios utilisateurs importants passent.

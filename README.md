@@ -2,7 +2,13 @@
 
 Ce dépôt est **mon guide de programmation Python pour ChatGPT**. Il fournit des règles de qualité (PEP 8, KISS, SOLID, YAGNI, DRY), de conception modulaire, de sécurité, de gestion d'erreurs et de tests, adaptées aux petits scripts comme aux grandes applications.
 
-**Ce dépôt ne contient pas un programme Python à installer ou exécuter.** C'est une bibliothèque d'instructions pour guider la génération et la modification de code.
+**Ce dépôt n'est pas une application Python à installer.** C'est un référentiel
+d'instructions et de modèles de démarrage, avec un validateur documentaire.
+
+**Version des standards :** [0.1.0](VERSION) ·
+[Changelog](CHANGELOG.md) ·
+[Sources de vérité](docs/STANDARDS_INDEX.md) ·
+[CI documentaire](.github/workflows/docs-check.yml).
 
 ## Démarrage rapide — comment l'utiliser
 
@@ -93,6 +99,35 @@ configuration et ses contraintes.
 
 Lire le [guide uv complet](docs/UV_WORKFLOW.md).
 
+## Exemples Python exécutables avec uv
+
+Trois [modèles de démarrage](templates/README.md) permettent d'appliquer
+le contexte rapidement, sans imposer une architecture unique :
+
+- [XS](templates/xs/README.md) : script autonome, bibliothèque standard.
+- [S](templates/s/README.md) : petite CLI Python packagée, pytest + Ruff.
+- [M](templates/m/README.md) : application modulaire simple, domaine et I/O séparés.
+
+Les exemples S/M utilisent `uv` et exigent de **générer puis commiter
+`uv.lock` dans le nouveau dépôt** avant d'adopter le workflow
+[CI Python](templates/github/workflows/python-ci.yml). Ce dépôt garde
+les modèles génériques sans lockfile imposé.
+
+## Validation automatique des conventions
+
+Un workflow GitHub Actions de documentation contrôle désormais les liens
+relatifs Markdown, la syntaxe YAML/TOML/Python, le validateur et le bon
+fonctionnement des exemples XS/S/M (tests, Ruff et build uv pour S/M).
+
+```bash
+uv run --no-project --with 'pyyaml==6.0.3' python scripts/validate_repo.py
+```
+
+Voir le [validateur](scripts/validate_repo.py) et les
+[tests](tests/test_validation.py). Les workflows de déploiement ou de
+publication restent absents : seuls les **contrôles documentaires et les
+exemples** sont exécutés ici.
+
 ## Convention GitHub pour les projets Python
 
 Les **noms de branches, messages de commit et titres de PR** sont en anglais.
@@ -115,7 +150,9 @@ Lire la [convention Git et GitHub complète](docs/GIT_WORKFLOW.md).
 ## Huit conventions de qualité et de collaboration
 
 Ces conventions **complètent** la stratégie Git et GitHub et s'adaptent à la
-taille **XS/S/M/L-XL** et au risque du projet :
+taille **XS/S/M/L-XL** et au risque du projet. Le
+[répertoire des sources de vérité](docs/STANDARDS_INDEX.md) précise quel
+document fait autorité sur chaque sujet :
 
 1. [Gestion des issues](docs/GITHUB_ISSUES.md) : bugs, fonctionnalités, priorités et critères d'acceptation.
 2. [Pull requests](docs/PULL_REQUESTS.md) : description, revue et vérifications.
@@ -134,10 +171,11 @@ taille **XS/S/M/L-XL** et au risque du projet :
 [ADR](templates/adr/0000-template.md),
 [Changelog](templates/CHANGELOG.md).
 
-Les modèles d'issues et de PR sont actifs pour ce dépôt de documentation.
-Les fichiers sous **templates/** ne sont pas actifs : les copier et adapter
-dans chaque projet Python concerné. Aucun workflow CI de Python ni déploiement
-automatique n'est activé dans project-python.
+Les modèles d'issues et de PR sont actifs pour ce dépôt. Les modèles
+sous **templates/** ne s'exécutent pas automatiquement dans d'autres
+dépôts : il faut les copier et adapter. Le workflow
+[docs-check.yml](.github/workflows/docs-check.yml) valide ce référentiel
+et ses exemples ; **aucun déploiement ni publication automatique** n'existe.
 
 ## Conventions de choix technique et de documentation du code
 
@@ -180,6 +218,7 @@ Si le fichier GitHub change, demander à ChatGPT de le relire ; une copie déjà
 | [docs/LOGGING.md](docs/LOGGING.md) | Journalisation et diagnostic |
 | [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md) | Choix de bibliothèques/frameworks actuels et maintenus |
 | [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md) | Docstrings Python en anglais (PEP 257, style Google proportionné) |
+| [docs/STANDARDS_INDEX.md](docs/STANDARDS_INDEX.md) | Sources de vérité de chaque convention ; éviter les doublons |
 | [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md) | **uv par défaut** : création, dépendances, exécution, lockfile, builds, CI |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Stratégie GitHub XS/S/M/L-XL, branches, commits en anglais, PR et releases |
 | [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) | Méthode de travail, vérifications et compte rendu |

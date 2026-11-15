@@ -1,7 +1,8 @@
 # Contexte du projet — modèle à copier et compléter
 
 > Ce fichier est un modèle. Le remplir pour chaque projet, ou le copier dans son dossier.
-> Les règles générales sont dans `AGENTS.md`.
+> Les règles générales sont dans `AGENTS.md` ; les documents de référence
+> sont listés dans `docs/STANDARDS_INDEX.md`.
 
 ## Identité
 - Nom : À définir

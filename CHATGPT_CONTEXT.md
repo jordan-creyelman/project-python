@@ -76,25 +76,17 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 - Adapter PR, revues, CI, protections et releases à la **taille et au risque** du projet ; ne pas imposer GitFlow complet aux petits outils.
 - Avant de modifier un dépôt, lire [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md), vérifier ses branches et respecter les conventions existantes. Ne pas créer `dev` ni modifier les protections sans accord.
 
-## Huit conventions de pilotage GitHub — seulement si pertinentes
+## Gouvernance GitHub et sources de vérité
 
-Pour tout projet GitHub, sélectionner et adapter les conventions :
-[Issues](docs/GITHUB_ISSUES.md),
-[Pull requests](docs/PULL_REQUESTS.md),
-[CI/CD](docs/CI_CD_STRATEGY.md),
-[Versioning](docs/VERSIONING.md),
-[Dépendances](docs/DEPENDENCIES.md),
-[Security Policy](docs/SECURITY_POLICY.md),
-[Definition of Done](docs/DEFINITION_OF_DONE.md) et
-[ADR](docs/ADR.md).
+Sélectionner les pratiques utiles dans le
+[répertoire des standards](docs/STANDARDS_INDEX.md) :
+issues, PR, CI/CD, versions, dépendances, sécurité, Definition of Done et ADR.
 
-- **XS** : pas de bureaucratie ; tests et documentation seulement si utiles.
-- **S** : issues/PR et CI légère recommandées selon l'usage.
-- **M** : PR et CI, versions traçables et décisions structurantes documentées.
-- **L/XL** : revues, contrôles, sécurité et ADR renforcés selon l'impact.
-- Ne jamais activer automatiquement un workflow, un bot, des protections, une
-  publication ou un canal de signalement fictif sur un autre dépôt.
-- Les modèles GitHub de ce référentiel sont à adapter au projet ; voir README.
+**Adapter à XS/S/M/L-XL** : éviter la bureaucratie en XS, recommander des
+PR et une CI légère en S, renforcer les contrôles et la traçabilité en
+M/L. Ne jamais activer une protection, un bot ou un déploiement sans
+demande explicite. Pour démarrer, utiliser les
+[modèles XS/S/M](templates/README.md), avec uv lorsqu'il convient.
 
 ## Taille du projet (à déduire sans demander inutilement)
 - **XS** : petit script ou exercice ; un fichier peut suffire.

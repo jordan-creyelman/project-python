@@ -38,4 +38,7 @@ Le fichier templates/github/workflows/python-ci.yml est un **modèle inactif** i
 - Publier seulement depuis une référence stable validée ; les tags et releases suivent VERSIONING.md.
 - Pas de déploiement automatique depuis ce dépôt d'instructions.
 
-**project-python n'est pas un projet exécutable : aucun workflow actif n'est placé dans .github/workflows ici.**
+**project-python n'est pas une application Python :** son workflow
+[`docs-check.yml`](../.github/workflows/docs-check.yml) contrôle les
+liens, formats, syntaxe et exemples XS/S/M. Il n'exécute aucun déploiement
+et ne doit pas être copié tel quel dans une application.
