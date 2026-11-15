@@ -29,6 +29,18 @@ Pour un projet existant, lire les fichiers accessibles et expliquer l'existant a
 - Éviter abstractions spéculatives, couches vides, nouveaux frameworks et renommages de masse.
 - Pour changements risqués, prévoir compatibilité, migration et rollback.
 
+## GitHub : appliquer la stratégie proportionnée
+- Avant toute opération GitHub, lire [GIT_WORKFLOW.md](GIT_WORKFLOW.md) et
+  inspecter les branches réellement présentes.
+- Selon la taille XS/S/M/L-XL, choisir `main` seule ou `main` + `dev`,
+  les branches de travail, la cible des PR et les contrôles.
+- Branches, commits et titres de PR **en anglais** ; commits
+  **Conventional Commits** (`feat(cli): add command`).
+- Respecter le workflow du dépôt existant. Ne pas créer `dev` ni modifier
+  protections/rulesets sans validation explicite.
+- Pour une correction urgente de production, partir de `main` et
+  synchroniser ensuite `dev` si elle existe.
+
 ## 3. Implémenter
 - Faire de petites modifications cohérentes ; conserver le style du dépôt.
 - Valider les entrées externes, gérer erreurs prévues, ne pas masquer les exceptions.

@@ -104,6 +104,12 @@ project/
 ```
 Règles : commencer par un monolithe modulaire ; documenter les décisions structurantes (ADR) ; observabilité, CI et migrations selon besoins. Microservices uniquement avec raisons opérationnelles solides.
 
+## Convention Git / GitHub (obligatoire lors des actions GitHub)
+- Consulter et appliquer [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) : noms de branches et messages de commit **en anglais**, format **Conventional Commits**, stratégie adaptée aux tailles XS/S/M/L-XL.
+- `main` représente l'état stable. `dev` est recommandée pour les projets M/L-XL avec intégration continue, **pas imposée** aux petits scripts et CLI.
+- Branches temporaires : `feature/*`, `fix/*`, `hotfix/*`, `docs/*`, `refactor/*`, `test/*`, `chore/*` ; `release/*` uniquement si justifiée.
+- Avant de créer des branches, PR ou commits, examiner le workflow existant et le respecter. Ne pas changer les protections GitHub ou le modèle de branches sans validation.
+
 ## Règles de décision
 - Une fonction simple est préférable à une classe sans état.
 - Une classe est pertinente si état + invariants, ou comportement polymorphe réel.
@@ -162,5 +168,6 @@ Si une donnée manque, faire une hypothèse explicite et réversible ; ne pas in
 - [docs/SECURITY.md](docs/SECURITY.md) : entrées externes, secrets, permissions, injections et dépendances. Sécurité non négociable, contrôles proportionnés aux risques.
 - [docs/CONFIGURATION.md](docs/CONFIGURATION.md) : configuration explicite, validation au démarrage, variables d'environnement et séparation des secrets.
 - [docs/LOGGING.md](docs/LOGGING.md) : niveaux de logs, gestion des traces, informations non sensibles et observabilité proportionnée.
+- [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) : conventions de branches, commits professionnels en anglais, PR, releases et protections selon la taille du projet.
 - [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) : contrat de travail de l'assistant, analyse de l'existant, changements minimaux, vérifications et compte rendu honnête.
 - Pour chaque nouvelle tâche, lire uniquement les guides pertinents en plus de ce fichier et du contexte du projet.

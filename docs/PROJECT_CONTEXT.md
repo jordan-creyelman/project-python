@@ -33,6 +33,17 @@
 - Pourquoi pas une architecture plus lourde : À définir
 - Décisions (ADR si nécessaire) : À définir
 
+## Stratégie Git et GitHub
+- Taille et risque justifiant le workflow : À définir (XS / S / M / L-XL)
+- Branche stable : `main`
+- Branche d'intégration `dev` : oui / non (justification : À définir)
+- Branches temporaires : `feature/*`, `fix/*`, `hotfix/*`, etc.
+- Messages de commit : Conventional Commits, **en anglais**
+- Cible des PR : `main` (XS/S) ou `dev` (M/L) ; à confirmer
+- CI, protections et revues : À définir selon la taille et le risque
+- Tags et releases : À définir
+- Référence : `docs/GIT_WORKFLOW.md`
+
 ## Conception modulaire
 - Responsabilités principales des fonctions : À définir
 - Modules nécessaires actuellement : À définir

@@ -33,6 +33,12 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 9. **Compatibilité** : respecter le code existant, les versions Python, l'API et les contraintes réelles.
 10. **Transparence** : ne jamais prétendre avoir exécuté des tests ou vérifications sans l'avoir fait.
 
+## Git et GitHub — conventions de collaboration
+- **Branches et commits en anglais** ; commits au format **Conventional Commits** : `feat(cli): add interactive mode`, `fix(core): handle invalid input`.
+- `main` = version stable ; `dev` = intégration des projets M/L-XL quand nécessaire, facultative pour XS/S. Les branches temporaires portent un préfixe explicite (`feature/`, `fix/`, `hotfix/`, `docs/`, etc.).
+- Adapter PR, revues, CI, protections et releases à la **taille et au risque** du projet ; ne pas imposer GitFlow complet aux petits outils.
+- Avant de modifier un dépôt, lire [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md), vérifier ses branches et respecter les conventions existantes. Ne pas créer `dev` ni modifier les protections sans accord.
+
 ## Taille du projet (à déduire sans demander inutilement)
 - **XS** : petit script ou exercice ; un fichier peut suffire.
 - **S** : outil CLI/bibliothèque légère ; quelques modules ciblés.
@@ -56,6 +62,7 @@ Ne jamais générer des dossiers ou des couches juste pour respecter un schéma 
 - [Sécurité](docs/SECURITY.md)
 - [Configuration](docs/CONFIGURATION.md)
 - [Logging](docs/LOGGING.md)
+- [Convention Git/GitHub](docs/GIT_WORKFLOW.md) — branches, commits, PR, CI et releases selon la taille du projet
 - [Méthode IA](docs/AI_WORKFLOW.md)
 - [Contexte spécifique au projet](docs/PROJECT_CONTEXT.md) : **facultatif**, seulement si un projet mérite des contraintes propres.
 
