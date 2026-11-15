@@ -1,0 +1,48 @@
+name: Documentation and starter checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Install uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          enable-cache: false
+      - name: Install Python
+        run: uv python install 3.12
+      - name: Validate docs and configuration syntax
+        run: uv run --no-project --python 3.12 --with 'pyyaml==6.0.3' python scripts/validate_repo.py
+      - name: Test documentation validator
+        run: uv run --no-project --python 3.12 --with 'pyyaml==6.0.3' python -m unittest discover -s tests -v
+      - name: Test XS script
+        working-directory: templates/xs
+        run: uv run --no-project --python 3.12 python -m unittest discover -s tests -v
+      - name: Test S starter with uv, pytest and Ruff
+        working-directory: templates/s
+        run: |
+          uv lock
+          uv sync --locked
+          uv run --locked python -m pytest -q
+          uv run --locked ruff check .
+          uv run --locked ruff format --check .
+          uv build
+      - name: Test M starter with uv, pytest and Ruff
+        working-directory: templates/m
+        run: |
+          uv lock
+          uv sync --locked
+          uv run --locked python -m pytest -q
+          uv run --locked ruff check .
+          uv run --locked ruff format --check .
+          uv build
