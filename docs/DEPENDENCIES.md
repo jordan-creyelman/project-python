@@ -9,6 +9,17 @@
 | M | Dépendances suivies, compatibilité Python définie, reproduction des builds. |
 | L/XL | Gouvernance des versions, licences, audits et mises à jour de sécurité. |
 
+## Choix et actualité des bibliothèques/frameworks
+
+Appliquer [LIBRARY_SELECTION.md](LIBRARY_SELECTION.md) **avant** d'ajouter
+une dépendance majeure : adéquation au besoin, versions Python/OS,
+release stable supportée, maintenance et sécurité réelles, licence,
+stabilité et coût. Donner la préférence à une bibliothèque avec **une
+communauté large et active** lorsque plusieurs choix sont similaires.
+Vérifier les faits récents sur la documentation officielle, PyPI et
+le dépôt source ; dater la vérification et signaler l'incertitude
+si les sources n'ont pas été consultées.
+
 ## Règles
 
 1. Déclarer les dépendances de production dans pyproject.toml et les dépendances de développement dans un extra dev ou un groupe dédié ; choisir une seule méthode.

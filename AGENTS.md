@@ -31,6 +31,8 @@ Sur un projet existant, lire son code et ses documents avant de le décrire ; di
 - **SOLID proportionné** : responsabilité unique, extension contrôlée, substitutions valides, interfaces petites, dépendances inversées aux frontières quand cela réduit le couplage. Pas de classes ni d'interfaces artificielles.
 - **Composition plutôt qu'héritage** quand les deux sont possibles.
 - **Python idiomatique** : bibliothèque standard d'abord, `pathlib`, gestion explicite des erreurs, context managers, annotations de type aux frontières.
+- **Dépendances** : sélectionner outils et frameworks adaptés au besoin, stables, actuels, maintenus et soutenus par une communauté active et importante si possible ; vérifier versions, support et sécurité. Suivre [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md).
+- **Docstrings** : en **anglais** pour toute API publique nouvellement écrite ou modifiée ; PEP 257, détails utiles sans verbosité. Suivre [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md).
 - **Sécurité** : aucune clé/API secret dans Git, validation des entrées externes, pas de `eval` ni d'exécution shell non justifiée, dépendances minimales.
 
 ## Choisir la taille AVANT l'architecture
@@ -129,6 +131,25 @@ Appliquer les règles utiles selon la taille, l'exposition et la criticité :
 - Ne jamais confondre un modèle présent avec une intégration activée.
 - Avant toute livraison, rapporter les tests **réellement exécutés** et les
   résultats constatés ; ne pas inventer de statut CI, release ou approbation.
+
+## Choix des bibliothèques, frameworks et style des docstrings
+
+Avant d'introduire une dépendance significative :
+1. Vérifier si la bibliothèque standard ou l'existant suffisent.
+2. Vérifier **l'adéquation**, la version stable et la compatibilité
+   Python/OS, la maintenance, les avis de sécurité, la licence et le coût.
+3. Préférer une communauté **active et étendue** quand plusieurs options
+   répondent également au besoin ; ne pas confondre stars et fiabilité.
+4. Comparer 2–3 options pour les choix structurants, citer les sources
+   et la **date de vérification** quand les données sont récentes.
+5. Adapter la rigueur à XS/S/M/L-XL : aucun framework gratuit pour XS,
+   choix simple pour S, comparaison documentée pour M/L si pertinent.
+
+Toute docstring Python ajoutée ou modifiée est **rédigée en anglais**.
+PEP 257 et résumé concis ; utiliser le style Google si des sections
+Args/Returns/Raises sont nécessaires. Ne pas traduire sans raison tout
+le code existant. Voir [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md)
+et [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md).
 
 ## Règles de décision
 - Une fonction simple est préférable à une classe sans état.

@@ -23,7 +23,7 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 
 ## Règles permanentes
 1. **KISS / YAGNI** : solution la plus simple répondant au besoin, sans fonctionnalités spéculatives.
-2. **PEP 8 / Python idiomatique** : noms explicites, annotations utiles, `pathlib`, context managers et bibliothèque standard lorsque pertinente. Respecter PEP 257 pour les docstrings utiles.
+2. **PEP 8 / Python idiomatique** : noms explicites, annotations utiles, `pathlib`, context managers et bibliothèque standard lorsque pertinente. Toute docstring Python nouvelle ou modifiée doit être **en anglais**, selon PEP 257 ; voir [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md).
 3. **SOLID / DRY proportionnés** : responsabilité claire, faible couplage et cohésion forte. Éviter abstractions et duplication de logique, mais aussi la surarchitecture.
 4. **Modularité** : fonctions courtes *quand cela améliore la clarté* (pas de limite arbitraire), entrées/sorties définies, séparation logique métier / I/O selon besoin. Classes seulement si elles apportent quelque chose.
 5. **Erreurs** : valider les entrées externes, exceptions précises, conserver la cause, jamais masquer silencieusement une défaillance.
@@ -32,6 +32,26 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 8. **Configuration / logs** : configuration explicite, messages utiles, pas de données sensibles, complexité adaptée.
 9. **Compatibilité** : respecter le code existant, les versions Python, l'API et les contraintes réelles.
 10. **Transparence** : ne jamais prétendre avoir exécuté des tests ou vérifications sans l'avoir fait.
+
+## Bibliothèques, frameworks et docstrings
+
+- Choisir une bibliothèque ou un framework **en fonction du besoin et
+  de la taille du projet**, pas par habitude ou simple popularité.
+- Bibliothèque standard d'abord lorsqu'elle suffit ; sinon préférer
+  une solution **stable, actuelle, activement maintenue**, compatible
+  avec Python/l'OS et bénéficiant d'une **large communauté active**.
+  Évaluer sécurité, licences, stabilité de l'API et coût de maintenance.
+- Pour les choix non triviaux, comparer brièvement 2–3 options. Si la
+  fraîcheur compte, consulter les sources officielles/PyPI et le dépôt
+  source, **indiquer la date et les preuves** ; en l'absence de
+  vérification, signaler l'incertitude. Une nouveauté n'est pas
+  meilleure qu'une version mature et supportée par principe.
+- **Docstrings Python en anglais**, conformes à PEP 257, claires et
+  concises ; style Google pour les contrats qui demandent des sections.
+  Conserver la langue du projet pour les autres textes et ne pas
+  réécrire les docstrings existantes hors périmètre.
+- Guides : [sélection des bibliothèques](docs/LIBRARY_SELECTION.md)
+  et [docstrings](docs/DOCSTRINGS.md).
 
 ## Git et GitHub — conventions de collaboration
 - **Branches et commits en anglais** ; commits au format **Conventional Commits** : `feat(cli): add interactive mode`, `fix(core): handle invalid input`.
@@ -83,6 +103,8 @@ Ne jamais générer des dossiers ou des couches juste pour respecter un schéma 
 - [Configuration](docs/CONFIGURATION.md)
 - [Logging](docs/LOGGING.md)
 - [Convention Git/GitHub](docs/GIT_WORKFLOW.md) — branches, commits, PR, CI et releases selon la taille du projet
+- [Sélection de bibliothèques et frameworks](docs/LIBRARY_SELECTION.md) — adéquation, fraîcheur, communauté, maintenance et alternatives
+- [Docstrings en anglais](docs/DOCSTRINGS.md) — PEP 257 et style Google si nécessaire
 - [Méthode IA](docs/AI_WORKFLOW.md)
 - [Contexte spécifique au projet](docs/PROJECT_CONTEXT.md) : **facultatif**, seulement si un projet mérite des contraintes propres.
 

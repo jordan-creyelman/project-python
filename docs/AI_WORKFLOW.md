@@ -29,6 +29,20 @@ Pour un projet existant, lire les fichiers accessibles et expliquer l'existant a
 - Éviter abstractions spéculatives, couches vides, nouveaux frameworks et renommages de masse.
 - Pour changements risqués, prévoir compatibilité, migration et rollback.
 
+## Choix technique et documentation Python
+
+- Avant d'imposer un framework ou une bibliothèque, appliquer
+  [LIBRARY_SELECTION.md](LIBRARY_SELECTION.md) : vérifier adéquation,
+  maintenance, support actuel, communauté, compatibilité, sécurité et
+  alternatives pertinentes. Vérifier les faits temporels lorsqu'ils
+  comptent et préciser la date/sources consultées.
+- Pour les fonctions/classes/modules publics nouveaux ou touchés,
+  écrire les docstrings **en anglais** selon
+  [DOCSTRINGS.md](DOCSTRINGS.md). Ne pas confondre docstrings
+  techniques et messages destinés aux utilisateurs.
+- Respecter la taille XS/S/M/L-XL : éviter les comparatifs artificiels
+  et les refactorings de documentation hors périmètre.
+
 ## GitHub : appliquer la stratégie proportionnée
 - Avant toute opération GitHub, lire [GIT_WORKFLOW.md](GIT_WORKFLOW.md) et
   inspecter les branches réellement présentes.

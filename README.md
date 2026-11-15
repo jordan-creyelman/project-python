@@ -115,6 +115,22 @@ Les fichiers sous **templates/** ne sont pas actifs : les copier et adapter
 dans chaque projet Python concerné. Aucun workflow CI de Python ni déploiement
 automatique n'est activé dans project-python.
 
+## Conventions de choix technique et de documentation du code
+
+- [Choix des bibliothèques et frameworks](docs/LIBRARY_SELECTION.md) :
+  préférer des solutions adaptées, stables, récentes et maintenues,
+  avec une **communauté active et importante** si plusieurs options
+  répondent au besoin. Vérifier les versions et la maintenance au moment
+  de recommander ; ne pas choisir uniquement sur la popularité.
+- [Docstrings Python en anglais](docs/DOCSTRINGS.md) :
+  PEP 257, docstrings explicites pour les API publiques et les comportements
+  non évidents ; style Google si des sections sont utiles. Les échanges
+  et la documentation utilisateur peuvent rester en français.
+
+Les décisions restent proportionnées à XS/S/M/L-XL. Ces conventions
+s'appliquent aux futurs projets quand le contexte est utilisé, sans
+modifier automatiquement leurs dépendances ou leur code existant.
+
 ## Utilisation sur plusieurs conversations
 
 **Important : le dépôt GitHub n'est pas automatiquement chargé dans toutes les conversations ChatGPT.**
@@ -138,6 +154,8 @@ Si le fichier GitHub change, demander à ChatGPT de le relire ; une copie déjà
 | [docs/SECURITY.md](docs/SECURITY.md) | Secrets, entrées non fiables, permissions et injections |
 | [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | Variables d'environnement, validation et paramètres |
 | [docs/LOGGING.md](docs/LOGGING.md) | Journalisation et diagnostic |
+| [docs/LIBRARY_SELECTION.md](docs/LIBRARY_SELECTION.md) | Choix de bibliothèques/frameworks actuels et maintenus |
+| [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md) | Docstrings Python en anglais (PEP 257, style Google proportionné) |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Stratégie GitHub XS/S/M/L-XL, branches, commits en anglais, PR et releases |
 | [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) | Méthode de travail, vérifications et compte rendu |
 | [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) | Modèle **facultatif** pour préciser un programme particulier |

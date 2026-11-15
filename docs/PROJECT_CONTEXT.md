@@ -23,6 +23,9 @@
 - Plateformes : À définir
 - Entrées / sorties : À définir
 - Dépendances autorisées : bibliothèque standard d'abord
+- Bibliothèques/frameworks envisagés : adéquation et alternatives à préciser
+- Vérification des versions, maintenance, communauté et sécurité : source/date à renseigner si nécessaire
+- Référence : `docs/LIBRARY_SELECTION.md`
 - Persistance / API / UI : aucune, sauf besoin explicite
 - Sécurité, confidentialité, performances : À définir
 
@@ -74,6 +77,8 @@ simple copie de modèles. Adapter au contexte XS/S/M/L-XL.
 - Ruff : lint et format
 - pytest : tests utiles
 - Typage statique : selon risque/complexité
+- Docstrings Python nouvelles/modifiées : **anglais**, PEP 257, style Google si utile
+- Référence : `docs/DOCSTRINGS.md`
 - Critères d'acceptation : À définir
 
 ## Gestion des erreurs

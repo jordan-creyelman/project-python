@@ -11,7 +11,7 @@ Créer des fonctions cohérentes, faciles à lire, réutiliser et tester ; répa
 - **Éviter les booléens de mode** si une fonction effectue deux comportements différents ; préférer deux noms explicites si justifié.
 - **Complexité** : utiliser des retours anticipés (guard clauses), éviter les imbrications profondes et les arguments trop nombreux ; regrouper les paramètres conceptuellement liés avec une dataclass uniquement si utile.
 - **Exceptions** : documenter les erreurs attendues ; ne pas retourner `None` silencieusement après un échec. Voir `docs/ERROR_HANDLING.md`.
-- **Documentation** : docstrings PEP 257 pour API publique et comportements non évidents ; éviter les commentaires répétant le code.
+- **Documentation** : toutes les docstrings Python nouvelles/modifiées sont **en anglais** ; suivre PEP 257 et [DOCSTRINGS.md](DOCSTRINGS.md) pour les API publiques et comportements non évidents. Éviter les commentaires répétant le code.
 - **Pas de règles rigides** sur le nombre de lignes ou de paramètres ; faire un refactoring dès que compréhension, test ou évolution deviennent difficiles.
 
 ## Modularité
@@ -32,14 +32,14 @@ from pathlib import Path
 
 
 def total_prices(prices: list[float]) -> float:
-    """Calculer le total des prix ; ne fait aucune I/O."""
+    """Calculate the total price without performing I/O."""
     if any(price < 0 for price in prices):
         raise ValueError("Un prix ne peut pas être négatif")
     return sum(prices)
 
 
 def load_prices(path: Path) -> list[float]:
-    """Lire des prix depuis un fichier texte, un par ligne."""
+    """Read one price per line from a text file."""
     return [
         float(line)
         for line in path.read_text(encoding="utf-8").splitlines()
@@ -48,7 +48,7 @@ def load_prices(path: Path) -> list[float]:
 
 
 def total_from_file(path: Path) -> float:
-    """Orchestrer la lecture et le calcul."""
+    """Read prices from a file and calculate their total."""
     return total_prices(load_prices(path))
 ```
 
