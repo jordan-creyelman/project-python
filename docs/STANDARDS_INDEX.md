@@ -24,7 +24,8 @@ font autorité sur les détails de leur sujet**.
 | Definition of Done | [DEFINITION_OF_DONE.md](DEFINITION_OF_DONE.md) |
 | ADR | [ADR.md](ADR.md) |
 | Conception modulaire | [MODULAR_DESIGN.md](MODULAR_DESIGN.md) |
-| Erreurs, configuration et logs | [ERROR_HANDLING.md](ERROR_HANDLING.md), [CONFIGURATION.md](CONFIGURATION.md), [LOGGING.md](LOGGING.md) |
+| Erreurs et logs | [ERROR_HANDLING.md](ERROR_HANDLING.md), [LOGGING.md](LOGGING.md) |
+| Variables d'environnement et configuration | [CONFIGURATION.md](CONFIGURATION.md) |
 | Procédure de travail IA | [AI_WORKFLOW.md](AI_WORKFLOW.md) |
 | Contexte propre à un projet | [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) |
 | Génération et validation des nouveaux projets | [PROJECT_AUTOMATION.md](PROJECT_AUTOMATION.md) |

@@ -4,6 +4,7 @@
 - Traiter toutes les entrées externes (CLI, API, fichiers, environnement, DB) comme non fiables.
 - Principe du moindre privilège ; limiter les accès disque, réseau et comptes techniques.
 - Ne jamais commiter de secrets ; utiliser variables d'environnement ou gestionnaire de secrets.
+- Ignorer `.env` et ses variantes privées ; versionner uniquement `.env.example` sans secrets réels. Ne pas laisser les valeurs sensibles apparaître dans les erreurs ou logs. Voir [CONFIGURATION.md](CONFIGURATION.md).
 - Ne jamais afficher tokens, mots de passe, données personnelles ou secrets dans erreurs, logs et traces.
 - Mettre à jour les dépendances et vérifier leur provenance ; limiter le nombre de paquets.
 - Éviter `eval`, `exec`, la désérialisation `pickle` de données non fiables et `shell=True` avec entrées externes.

@@ -28,6 +28,10 @@
 - Commandes d'installation et test : `uv sync` et `uv run` si uv est adopté
 - Version Python et `uv.lock` : À définir ; migration éventuelle : À valider
 - Référence : `docs/UV_WORKFLOW.md`
+- Variables d'environnement : nécessaires ou non ; préfixe propre au projet
+- Sources et priorité de configuration : CLI / environnement / défauts, à préciser
+- Secrets : uniquement via canal sécurisé, jamais dans `.env.example`
+- Référence : `docs/CONFIGURATION.md`
 - Dépendances autorisées : bibliothèque standard d'abord
 - Bibliothèques/frameworks envisagés : adéquation et alternatives à préciser
 - Vérification des versions, maintenance, communauté et sécurité : source/date à renseigner si nécessaire
