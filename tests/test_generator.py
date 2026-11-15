@@ -100,7 +100,6 @@ class TestProjectGenerator(unittest.TestCase):
             self.assertTrue((root / ".github/workflows/python-ci.yml").exists())
             self.assertTrue((root / "scripts/check_project.py").exists())
 
-
     def test_opt_in_config_for_s_renames_prefix_and_tests(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = create_project(
@@ -178,6 +177,6 @@ class TestProjectGenerator(unittest.TestCase):
                 )
             )
 
+
 if __name__ == "__main__":
     unittest.main()
-
