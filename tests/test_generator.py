@@ -77,13 +77,16 @@ class TestProjectGenerator(unittest.TestCase):
             ):
                 from subprocess import CalledProcessError
 
-                lock.side_effect = CalledProcessError(1, ["uv", "lock"], stderr="offline")
+                lock.side_effect = CalledProcessError(
+                    1, ["uv", "lock"], stderr="offline"
+                )
                 with self.assertRaisesRegex(RuntimeError, "offline"):
                     create_project("sensor-cli", "s", Path(directory))
             self.assertEqual(list(Path(directory).iterdir()), [])
 
     def test_default_s_generates_ci_and_lockfile(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
+
             def fake_lock(command, *, cwd, check, capture_output, text):
                 self.assertEqual(command, ["uv", "lock"])
                 Path(cwd, "uv.lock").write_text("version = 1\n", encoding="utf-8")

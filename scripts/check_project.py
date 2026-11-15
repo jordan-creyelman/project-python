@@ -77,7 +77,9 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
             )
         ]
     if declared_size is not None and declared_size != size:
-        findings.append(Finding("error", "The requested size conflicts with the marker."))
+        findings.append(
+            Finding("error", "The requested size conflicts with the marker.")
+        )
 
     if not _python_files(root):
         findings.append(Finding("error", "No Python source files were found."))
@@ -88,7 +90,9 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
             ast.parse(source, filename=str(path))
         except (UnicodeError, OSError, SyntaxError) as exc:
             findings.append(
-                Finding("error", f"Invalid Python source in {path.relative_to(root)}: {exc}")
+                Finding(
+                    "error", f"Invalid Python source in {path.relative_to(root)}: {exc}"
+                )
             )
 
     if size == "xs":
@@ -100,7 +104,9 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
     pyproject = root / "pyproject.toml"
     metadata: dict[str, object] = {}
     if not pyproject.is_file():
-        findings.append(Finding("error", "pyproject.toml is required for size S or above."))
+        findings.append(
+            Finding("error", "pyproject.toml is required for size S or above.")
+        )
     else:
         try:
             with pyproject.open("rb") as stream:
@@ -133,7 +139,9 @@ def check_project(root: Path, size: str | None = None) -> list[Finding]:
     for tool in ("pytest", "ruff"):
         if tool not in names:
             level = "warning" if size == "s" else "error"
-            findings.append(Finding(level, f"Declare {tool} in development dependencies."))
+            findings.append(
+                Finding(level, f"Declare {tool} in development dependencies.")
+            )
 
     tests = root / "tests"
     if not tests.is_dir() or not any(tests.rglob("test_*.py")):
@@ -165,9 +173,15 @@ def main(argv: list[str] | None = None) -> int:
     """Check a local project and report actionable findings."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--path", type=Path, default=Path("."))
-    parser.add_argument("--size", choices=SIZES, help="Override or supply the project size.")
-    parser.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
-    parser.add_argument("--json", action="store_true", help="Emit machine-readable results.")
+    parser.add_argument(
+        "--size", choices=SIZES, help="Override or supply the project size."
+    )
+    parser.add_argument(
+        "--strict", action="store_true", help="Treat warnings as failures."
+    )
+    parser.add_argument(
+        "--json", action="store_true", help="Emit machine-readable results."
+    )
     args = parser.parse_args(argv)
     findings = check_project(args.path, args.size)
     errors = sum(item.level == "error" for item in findings)

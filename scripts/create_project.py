@@ -26,7 +26,9 @@ def _readme(name: str, size: str) -> str:
     if size == "xs":
         instructions = """uv run main.py example.txt
 uv run python -m unittest discover -s tests -v"""
-        purpose = "Standalone Python script to count nonempty lines in a UTF-8 text file."
+        purpose = (
+            "Standalone Python script to count nonempty lines in a UTF-8 text file."
+        )
     elif size == "s":
         instructions = f"""uv sync --locked
 uv run --locked {name} 5 0.02
@@ -158,7 +160,11 @@ def create_project(
                 workflow = staging / ".github" / "workflows" / "python-ci.yml"
                 workflow.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(
-                    SOURCE_ROOT / "templates" / "github" / "workflows" / "python-ci.yml",
+                    SOURCE_ROOT
+                    / "templates"
+                    / "github"
+                    / "workflows"
+                    / "python-ci.yml",
                     workflow,
                 )
             if lock:
@@ -185,7 +191,9 @@ def create_project(
             if finding.level == "error" and finding.message not in waived
         ]
         if errors:
-            raise ValueError("Generated project failed validation:\n" + "\n".join(errors))
+            raise ValueError(
+                "Generated project failed validation:\n" + "\n".join(errors)
+            )
         if destination.exists():
             raise FileExistsError(f"Destination already exists: {destination}")
         staging.rename(destination)
@@ -200,7 +208,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--size", required=True, choices=SIZES)
     parser.add_argument("--parent", type=Path, default=Path("."))
     parser.add_argument("--no-ci", action="store_true", help="Skip GitHub Actions CI.")
-    parser.add_argument("--no-lock", action="store_true", help="Skip generating uv.lock.")
+    parser.add_argument(
+        "--no-lock", action="store_true", help="Skip generating uv.lock."
+    )
     args = parser.parse_args(argv)
     try:
         created = create_project(

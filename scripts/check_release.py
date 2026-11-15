@@ -52,7 +52,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--path", type=Path, default=Path("."))
     parser.add_argument("--version", help="Expected version, without the v prefix.")
-    parser.add_argument("--notes-file", type=Path, help="Write validated release notes.")
+    parser.add_argument(
+        "--notes-file", type=Path, help="Write validated release notes."
+    )
     args = parser.parse_args(argv)
     try:
         version, notes = validate_release(args.path, args.version)

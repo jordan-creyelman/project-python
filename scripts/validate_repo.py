@@ -54,7 +54,9 @@ def check_syntax(root: Path) -> list[str]:
     errors: list[str] = []
     for path in sorted([*root.rglob("*.yml"), *root.rglob("*.yaml")]):
         try:
-            mapping = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+            mapping = yaml.load(
+                path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader
+            )
             if not isinstance(mapping, dict):
                 raise TypeError("expected a mapping")
         except (yaml.YAMLError, TypeError, ValueError) as exc:
