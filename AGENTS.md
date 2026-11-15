@@ -35,6 +35,7 @@ Sur un projet existant, lire son code et ses documents avant de le décrire ; di
 - **Gestionnaire Python** : **uv par défaut** pour les nouveaux projets ; utiliser `uv run`, `uv add`, `uv sync` et `uv lock` selon la taille. Ne pas migrer automatiquement un dépôt utilisant un autre gestionnaire. Suivre [docs/UV_WORKFLOW.md](docs/UV_WORKFLOW.md).
 - **Docstrings** : en **anglais** pour toute API publique nouvellement écrite ou modifiée ; PEP 257, détails utiles sans verbosité. Suivre [docs/DOCSTRINGS.md](docs/DOCSTRINGS.md).
 - **Sécurité** : aucune clé/API secret dans Git, validation des entrées externes, pas de `eval` ni d'exécution shell non justifiée, dépendances minimales.
+- **Configuration** : nommer les variables en anglais avec un préfixe de projet, protéger `.env` dans Git et réserver `.env.example` aux valeurs non sensibles. Pour S/M, n'activer `--with-env` que si la configuration est utile ; suivre [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
 ## Workflow uv — convention obligatoire pour les nouveaux projets
 

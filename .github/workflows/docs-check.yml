@@ -57,8 +57,8 @@ jobs:
         run: |
           TEMP_PROJECTS=$(mktemp -d)
           trap 'rm -rf "$TEMP_PROJECTS"' EXIT
-          uv run --no-project --python 3.12 python scripts/create_project.py sensor-cli --size s --parent "$TEMP_PROJECTS"
-          uv run --no-project --python 3.12 python scripts/create_project.py task-manager --size m --parent "$TEMP_PROJECTS"
+          uv run --no-project --python 3.12 python scripts/create_project.py sensor-cli --size s --with-env --parent "$TEMP_PROJECTS"
+          uv run --no-project --python 3.12 python scripts/create_project.py task-manager --size m --with-env --parent "$TEMP_PROJECTS"
           (
             cd "$TEMP_PROJECTS/sensor-cli"
             uv sync --locked

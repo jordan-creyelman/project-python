@@ -103,3 +103,80 @@ class TestProjectGenerator(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_opt_in_config_for_s_renames_prefix_and_tests(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = create_project(
+                "sensor-cli",
+                "s",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
+            )
+            config = (root / "src" / "sensor_cli" / "config.py").read_text()
+            env_example = (root / ".env.example").read_text()
+            test = (root / "tests" / "test_config.py").read_text()
+            self.assertIn("SENSOR_CLI_TIMEOUT_SECONDS", config)
+            self.assertIn("SENSOR_CLI_LOG_LEVEL=INFO", env_example)
+            self.assertIn("from sensor_cli.config import", test)
+            self.assertFalse((root / ".env").exists())
+            self.assertIn(".env", (root / ".gitignore").read_text())
+            self.assertIn(
+                "environment-config = true",
+                (root / ".project-python.toml").read_text(),
+            )
+
+    def test_no_config_by_default(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = create_project(
+                "sensor-cli", "s", Path(directory), ci=False, lock=False
+            )
+            self.assertFalse((root / ".env.example").exists())
+            self.assertFalse((root / "src" / "sensor_cli" / "config.py").exists())
+
+    def test_opt_in_config_for_m(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = create_project(
+                "task-manager",
+                "m",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
+            )
+            self.assertIn(
+                "TASK_MANAGER_LOG_LEVEL",
+                (root / "src" / "task_manager" / "config.py").read_text(),
+            )
+            self.assertIn(
+                "from task_manager.config import",
+                (root / "tests" / "test_config.py").read_text(),
+            )
+
+    def test_reject_environment_config_for_xs(self) -> None:
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            self.assertRaisesRegex(ValueError, "S/M"),
+        ):
+            create_project("mini-script", "xs", Path(directory), with_env=True)
+
+    def test_validator_reports_missing_opt_in_env_template(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = create_project(
+                "sensor-cli",
+                "s",
+                Path(directory),
+                ci=False,
+                lock=False,
+                with_env=True,
+            )
+            (root / ".env.example").unlink()
+            from scripts.check_project import check_project
+
+            self.assertTrue(
+                any(
+                    "safe .env.example" in finding.message
+                    for finding in check_project(root)
+                )
+            )

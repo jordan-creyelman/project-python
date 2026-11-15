@@ -1,60 +1,106 @@
-# Configuration Python — fiable et simple
+# Configuration Python — variables d'environnement
 
-## Principes
-- Séparer configuration, code et secrets.
-- Préférer les paramètres explicites ; utiliser les variables d'environnement pour les valeurs dépendant du déploiement.
-- Centraliser la lecture et la validation à la frontière de l'application, pas dans chaque module.
-- Valider au démarrage les valeurs obligatoires ; échouer avec un message clair, sans révéler de secret.
-- Les valeurs par défaut doivent être sûres ; la configuration de production doit être explicite.
-- Garder un `.env.example` documenté avec valeurs factices seulement ; ignorer `.env` et les autres fichiers secrets dans Git.
-- Un fichier `.env` est une commodité locale, **pas** un coffre-fort ; le chargement automatique est optionnel et ne doit pas être présumé.
-- Ne pas lire l'environnement dans des fonctions métier pures ; passer un objet de configuration ou les paramètres nécessaires.
-- Éviter les frameworks et hiérarchies de configuration si `os.environ` + `dataclass` suffisent.
+Ce document est la **source de vérité** pour la configuration d'exécution.
+La configuration dépend du projet et du déploiement : **aucun `.env`
+n'est obligatoire** pour un programme qui n'en a pas besoin.
 
-## Exemple standard library
-```python
-import os
-from dataclasses import dataclass
+## 1. Convention de nommage
 
+- Noms en **anglais, majuscules, `UPPER_SNAKE_CASE`**.
+- Préfixe stable propre au projet : `<PROJECT>_<SETTING>`.
+- Exemple : `SENSOR_CLI_LOG_LEVEL` et `SENSOR_CLI_TIMEOUT_SECONDS`.
+- Éviter des noms trop génériques comme `DEBUG` ou `TOKEN` qui peuvent
+  entrer en conflit avec un autre service.
+- Indiquer les unités : `TIMEOUT_SECONDS`, `RETRY_COUNT`, etc.
+- Pour une clé d'API nécessaire, utiliser l'environnement ou un
+  gestionnaire de secrets, jamais une valeur réelle dans les exemples.
 
-@dataclass(frozen=True)
-class Settings:
-    endpoint: str
-    timeout_seconds: int = 5
+## 2. Principes
 
+1. Séparer **configuration**, code, données et secrets.
+2. Préférer les arguments CLI explicites pour les options choisies
+   à chaque exécution ; utiliser l'environnement pour les paramètres
+   dépendant du déploiement.
+3. Lire les variables à **une seule frontière d'entrée**, puis passer
+   un `Settings` immuable ou les valeurs nécessaires aux fonctions métier.
+4. Définir et tester la **priorité des sources par projet** : par exemple
+   arguments CLI explicites > environnement > défauts sûrs.
+5. Valider types, plages, unités et variables obligatoires au démarrage.
+   Variable absente et variable vide peuvent demander des traitements différents.
+6. Rendre les erreurs compréhensibles **sans afficher de valeur sensible**.
+7. Ne pas charger `.env` implicitement ni installer un framework de
+   configuration lorsque `os.environ` et `dataclass` suffisent.
 
-def load_settings() -> Settings:
-    endpoint = os.environ.get("APP_ENDPOINT", "").strip()
-    if not endpoint:
-        raise ValueError("APP_ENDPOINT est obligatoire")
+## 3. `.env`, `.env.example` et secrets
 
-    raw_timeout = os.environ.get("APP_TIMEOUT_SECONDS", "5")
-    try:
-        timeout = int(raw_timeout)
-    except ValueError as exc:
-        raise ValueError("APP_TIMEOUT_SECONDS doit être un entier") from exc
+Un `.env` est un **fichier local de confort, pas un coffre-fort**.
+Dans le `.gitignore` du projet :
 
-    if timeout <= 0:
-        raise ValueError("APP_TIMEOUT_SECONDS doit être positif")
-    return Settings(endpoint=endpoint, timeout_seconds=timeout)
+```gitignore
+.env
+.env.*
+!.env.example
 ```
 
-## Exemple de fichier local non sensible
-```dotenv
-# .env.example — documentation, pas de secrets réels
-APP_ENDPOINT=https://example.org
-APP_TIMEOUT_SECONDS=5
+Commiter **uniquement** `.env.example` avec des valeurs publiques ou
+fictives. Ne jamais y placer un vrai token, mot de passe ou certificat.
+Ne pas commiter `.env`, `.env.local`, `.env.production` ni les secrets CI.
+En production, préférer un gestionnaire de secrets et le principe du
+moindre privilège. Les variables d'environnement ne suffisent pas à
+protéger les secrets des journaux, processus ou dumps mémoire.
+
+Charger explicitement un fichier local avec uv :
+
+```bash
+cp .env.example .env
+uv run --env-file .env --locked python -m my_project
 ```
 
-## Tests
-- Variable requise absente.
-- Valeur de type incorrect, valeur hors limites.
-- Valeur par défaut correcte.
-- Aucun secret dans les messages d'erreur.
-- Utiliser `monkeypatch` pour contrôler l'environnement dans pytest.
+Ne pas supposer que `uv run` charge `.env` automatiquement. Adapter
+la commande au projet réel ; utiliser `--locked` uniquement si
+un `uv.lock` valide existe.
 
-## Selon la taille
-- XS : constantes explicites ou arguments CLI.
-- S : configuration d'entrée unique ; variables d'environnement si utiles.
-- M : `Settings` immuable et validation au démarrage, séparation dev/test/prod.
-- L/XL : gestionnaire de secrets, schémas versionnés et contrôles de déploiement si nécessaires.
+## 4. Modèle optionnel testé
+
+Le [modèle d'environnement](../templates/config/README.md) comprend :
+
+- [`config.py`](../templates/config/config.py) : `Settings` immuable,
+  `os.environ`, validation explicite, sans dépendance supplémentaire.
+- [`test_config.py`](../templates/config/test_config.py) : tests de
+  valeurs manquantes, incorrectes, hors limites, overrides et erreurs
+  qui ne répètent pas les valeurs sensibles.
+- [`.env.example`](../templates/config/.env.example) : exemples sûrs.
+
+Ce modèle n'est **pas installé par défaut**. Pour les nouveaux projets
+S/M qui ont besoin de configuration :
+
+```bash
+uv run --no-project python scripts/create_project.py sensor-cli --size s --with-env
+uv run --no-project python scripts/create_project.py task-manager --size m --with-env
+```
+
+Le générateur adapte le préfixe de `PROJECT_` en `SENSOR_CLI_` ou
+`TASK_MANAGER_`. Il ajoute les tests mais **ne relie pas automatiquement**
+la configuration au comportement de la CLI, qui doit rester une
+décision propre à l'application.
+
+## 5. Tests de configuration
+
+- Défauts lorsque les variables optionnelles sont absentes.
+- Erreur lisible si une variable obligatoire manque, le cas échéant.
+- Valeurs mal formées, chaînes vides, types invalides et plages.
+- Injection d'environnement de test via `monkeypatch` ou mapping.
+- Absence de secrets dans les erreurs, traces et logs.
+- Priorité des sources quand plusieurs sources sont disponibles.
+
+## 6. Taille du projet
+
+| Taille | Recommandation |
+| --- | --- |
+| XS | Constantes ou arguments CLI, aucun `.env` obligatoire. |
+| S | `os.environ` et validation ciblée, `--with-env` uniquement si utile. |
+| M | `Settings` typé et immuable, validation au démarrage et séparation dev/test/prod. |
+| L/XL | Gestionnaire de secrets et politiques de déploiement selon le risque. |
+
+Voir aussi [SECURITY.md](SECURITY.md) et
+[MODULAR_DESIGN.md](MODULAR_DESIGN.md).

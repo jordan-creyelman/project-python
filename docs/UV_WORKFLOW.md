@@ -81,6 +81,13 @@ uv sync --locked                 # Reproduction de l'environnement
 Les commandes `uv add`/`uv remove` et `uv run` peuvent actualiser le
 lockfile et l'environnement ; vérifier le diff du lockfile avant commit.
 
+### Configuration locale seulement si nécessaire
+
+`uv run --env-file .env --locked <commande>` charge un fichier
+d'environnement **explicitement**. Ne pas supposer que `uv run`
+charge `.env` automatiquement. Ne pas commiter `.env` et réserver
+`.env.example` aux exemples sûrs. Voir [CONFIGURATION.md](CONFIGURATION.md).
+
 ## 4. Fichiers et bonnes pratiques
 
 - `pyproject.toml` : métadonnées et dépendances directes.

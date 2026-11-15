@@ -29,7 +29,7 @@ Pour un projet existant, expliquer d'abord ce que l'on comprend du code, de sa s
 5. **Erreurs** : valider les entrées externes, exceptions précises, conserver la cause, jamais masquer silencieusement une défaillance.
 6. **Sécurité** : ne jamais intégrer de secrets, vérifier les opérations fichiers/shell/SQL/HTTP et appliquer le moindre privilège.
 7. **Tests** : couvrir cas normal, limites et erreurs pertinentes ; test de régression pour un bug corrigé si possible. Choisir unitaires, intégration et E2E selon le risque.
-8. **Configuration / logs** : configuration explicite, messages utiles, pas de données sensibles, complexité adaptée.
+8. **Configuration / logs** : configuration explicite, messages utiles, pas de données sensibles, complexité adaptée. Variables en anglais préfixées par projet (ex. `SENSOR_CLI_TIMEOUT_SECONDS`) ; `.env.example` sans secret et `.env` ignoré. Utiliser `--with-env` uniquement pour un projet S/M ayant besoin de paramètres. Voir [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 9. **Compatibilité** : respecter le code existant, les versions Python, l'API et les contraintes réelles.
 10. **Transparence** : ne jamais prétendre avoir exécuté des tests ou vérifications sans l'avoir fait.
 

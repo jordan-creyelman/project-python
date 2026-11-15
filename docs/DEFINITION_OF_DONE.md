@@ -9,6 +9,7 @@ Une tâche est terminée lorsque les comportements attendus ont été livrés **
 - [ ] Le diff est cohérent, lisible et sans secret ni artefact inutile.
 - [ ] Les dépendances nouvellement choisies sont adaptées, maintenues et compatibles ; toute incertitude sur leur actualité est déclarée.
 - [ ] Les docstrings Python ajoutées ou modifiées sont en anglais, exactes et conformes à PEP 257.
+- [ ] Si des variables d'environnement sont utilisées, elles sont nommées, documentées et testées ; `.env.example` ne contient aucun secret et `.env` est ignoré.
 - [ ] La documentation est à jour si l'usage ou l'interface a changé.
 - [ ] Les tests et vérifications **réellement exécutés** sont rapportés.
 - [ ] Les limites non vérifiées et risques restants sont déclarés.

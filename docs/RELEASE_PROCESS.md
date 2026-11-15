@@ -15,7 +15,7 @@ les versions des applications créées avec ses modèles.
 5. Vérifier :
 
 ```bash
-python scripts/check_release.py --version 0.2.0
+python scripts/check_release.py --version 0.3.0
 ```
 
 ## Publier uniquement sur demande

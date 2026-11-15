@@ -5,7 +5,7 @@ Ce dépôt est **mon guide de programmation Python pour ChatGPT**. Il fournit de
 **Ce dépôt n'est pas une application Python à installer.** C'est un référentiel
 d'instructions et de modèles de démarrage, avec un validateur documentaire.
 
-**Version des standards :** [0.2.0](VERSION) ·
+**Version des standards :** [0.3.0](VERSION) ·
 [Changelog](CHANGELOG.md) ·
 [Sources de vérité](docs/STANDARDS_INDEX.md) ·
 [CI documentaire](.github/workflows/docs-check.yml).
@@ -143,6 +143,21 @@ maintenabilité d'une bibliothèque ni la qualité linguistique des docstrings.
 Les projets S/M générés embarquent ce script et le lancent en CI.
 
 Lire le [guide d'automatisation](docs/PROJECT_AUTOMATION.md).
+
+## Variables d'environnement facultatives
+
+Pour un nouveau projet S/M qui a réellement besoin de configuration,
+le générateur peut ajouter `config.py`, `.env.example` et des tests :
+
+```bash
+uv run --no-project python scripts/create_project.py sensor-cli --size s --with-env
+```
+
+Les noms sont en anglais et préfixés (`SENSOR_CLI_LOG_LEVEL`).
+Les secrets restent hors Git ; charger `.env` explicitement avec
+`uv run --env-file .env ...`. Voir
+[CONFIGURATION.md](docs/CONFIGURATION.md) et
+[le modèle](templates/config/README.md).
 
 ## Validation automatique des conventions
 

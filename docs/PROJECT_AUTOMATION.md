@@ -12,6 +12,10 @@ uv run --no-project python scripts/create_project.py line-counter --size xs
 uv run --no-project python scripts/create_project.py sensor-cli --size s
 uv run --no-project python scripts/create_project.py task-manager --size m
 
+# Configuration d'environnement uniquement sur demande
+uv run --no-project python scripts/create_project.py sensor-cli --size s --with-env
+uv run --no-project python scripts/create_project.py task-manager --size m --with-env
+
 # Alternative : choisir le dossier parent
 uv run --no-project python scripts/create_project.py sensor-cli --size s --parent ~/projects
 
@@ -32,6 +36,10 @@ d'`uv lock`, le dossier temporaire est supprimé. Il n'accède pas à GitHub.
 
 Le fichier `.project-python.toml` enregistre la taille et la version
 des standards utilisés ; il n'installe aucun outil à lui seul.
+Avec `--with-env` pour S/M, il précise `environment-config = true`.
+Le contrôle portable vérifie alors `config.py`, `.env.example`, les
+tests de configuration et les règles d'ignorance Git. Le générateur
+ne crée jamais de `.env` réel ni de secret.
 Les projets générés S/M embarquent leur propre
 `scripts/check_project.py` et une CI qui lance ce contrôle.
 

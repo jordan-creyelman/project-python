@@ -9,6 +9,19 @@ ici avant publication d'une nouvelle version documentaire.
 ### Planned
 - Poursuivre les améliorations après retour d'expérience des projets réels.
 
+## [0.3.0] - 2026-11-15
+
+### Added
+- Convention de nommage des variables d'environnement et règles
+  de validation, priorité de configuration et protection des secrets.
+- Option `--with-env` du générateur S/M : `config.py`, `.env.example`
+  et tests pytest, avec préfixes propres à chaque projet.
+- Contrôle automatique des fichiers de configuration et tests CI.
+
+### Changed
+- Exclusion systématique des fichiers `.env` locaux dans les modèles.
+- Version des standards 0.2.0 → 0.3.0 ; aucune release publiée automatiquement.
+
 ## [0.2.0] - 2026-11-15
 
 ### Added
